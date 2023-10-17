@@ -260,7 +260,49 @@ int SCCbfs(const vector<list<int>> &adjList)
     return count;
 }
 
-///////////////////////ENDS HERE////////////////////////////////////////////////////////////
+/////////////////////// DIAMETER ////////////////////////////////////////////////////////////
+int diameter(const vector<list<int>> &adjList)
+{
+    int n = adjList.size();
+    int maxi = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        vector<bool> visited(n, false);
+        vector<int> distance(n, INT_MIN);
+
+        queue<int> q;
+        q.push(i);
+        visited[i] = true;
+        distance[i] = 0;
+
+        while (!q.empty())
+        {
+            int current = q.front();
+            q.pop();
+
+            for (int neighbor : adjList[current])
+            {
+                if (!visited[neighbor])
+                {
+                    visited[neighbor] = true;
+                    distance[neighbor] = distance[current] + 1;
+                    q.push(neighbor);
+                }
+            }
+        }
+        
+        int md;
+        for(auto i: distance) md = max(md,i);
+        
+        maxi = max(maxi, md);
+    }
+
+    return maxi;
+}
+
+
+
 
 int main()
 {

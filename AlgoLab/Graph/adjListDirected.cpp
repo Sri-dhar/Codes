@@ -142,6 +142,27 @@ void DFSUtil(const vector<list<int>>& adjList, int startNode, vector<bool>& visi
     s.push(startNode);
 }
 
+void BFSUtil(const vector<list<int>>& adjList, int startNode, vector<bool>& visited, queue<int>& q) {
+    auto n = adjList.size();
+
+    q.push(startNode);
+    visited[startNode] = true;
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+
+        for (int neighbor : adjList[current]) 
+        {
+            if (!visited[neighbor]) 
+            {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+    }
+}
+
 vector<list<int>> Grev(const vector<list<int>>& adjList) {
     int n = adjList.size();
     vector<list<int>> transposedAdjList(n);
@@ -182,6 +203,19 @@ int SCC(const vector<list<int>>& adjList) {
     return ans;
 }
 
+int SCCbfs(const vector<list<int>>& adjList)
+{
+    int n = adjList.size();
+    vector<bool> visited(n, false);
+    queue<int> q;
+    int count{};
+    for (int i = 0; i < n; i++) 
+        if (!visited[i]) {
+            BFSUtil(adjList, i, visited, q);
+            count++;
+        }
+    return count;
+}
 
 ///////////////////////ENDS HERE////////////////////////////////////////////////////////////
 
@@ -218,7 +252,8 @@ int main()
         cout << "6. Perform Breadth-First Search (BFS)\n";
         cout << "7. Perform Depth-First Search (DFS)\n";
         cout << "8. No. of SCC \n";
-        cout << "9. Exit\n";
+        cout << "9. No. of SCC using BFS\n";
+        cout << "10. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -257,11 +292,16 @@ int main()
                 DFS(adjList, startNodeDFS);
                 break;
             case 8:
-                int temp = SCC(adjList);
-                cout << "The number of strongly connected components is: " << temp << endl;
+                auto tempp = SCCbfs(adjList);
+                cout << "The number of strongly connected components (using KOSARAJU algorithm) is: " << tempp << endl;
+                break;
+            case 9:
+            {
+                int temp2 = SCCbfs(adjList);
+                cout << "The number of strongly connected components (using BFS) is: " << temp2 << endl;
                 break;
             }
-    } while (choice != 9);
+    } while (choice != 10);
 
     return 0;
 }

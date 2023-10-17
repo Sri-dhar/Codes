@@ -174,28 +174,28 @@ void DFShelper(const vector<list<int>> &adjList, int startNode, vector<bool> &vi
     s.push(startNode);
 }
 
-void BFSUtil(const vector<list<int>> &adjList, int startNode, vector<bool> &visited, queue<int> &q)
-{
-    auto n = adjList.size();
+// void BFSUtil(const vector<list<int>> &adjList, int startNode, vector<bool> &visited, queue<int> &q)
+// {
+//     auto n = adjList.size();
 
-    q.push(startNode);
-    visited[startNode] = true;
+//     q.push(startNode);
+//     visited[startNode] = true;
 
-    while (!q.empty())
-    {
-        int current = q.front();
-        q.pop();
+//     while (!q.empty())
+//     {
+//         int current = q.front();
+//         q.pop();
 
-        for (int neighbor : adjList[current])
-        {
-            if (!visited[neighbor])
-            {
-                q.push(neighbor);
-                visited[neighbor] = true;
-            }
-        }
-    }
-}
+//         for (int neighbor : adjList[current])
+//         {
+//             if (!visited[neighbor])
+//             {
+//                 q.push(neighbor);
+//                 visited[neighbor] = true;
+//             }
+//         }
+//     }
+// }
 
 vector<list<int>> Grev(const vector<list<int>> &adjList)
 {
@@ -245,20 +245,20 @@ int SCC(const vector<list<int>> &adjList)
     return ans;
 }
 
-int SCCbfs(const vector<list<int>> &adjList)
-{
-    int n = adjList.size();
-    vector<bool> visited(n, false);
-    queue<int> q;
-    int count{};
-    for (int i = 0; i < n; i++)
-        if (!visited[i])
-        {
-            BFSUtil(adjList, i, visited, q);
-            count++;
-        }
-    return count;
-}
+// int SCCbfs(const vector<list<int>> &adjList)
+// {
+//     int n = adjList.size();
+//     vector<bool> visited(n, false);
+//     queue<int> q;
+//     int count{};
+//     for (int i = 0; i < n; i++)
+//         if (!visited[i])
+//         {
+//             BFSUtil(adjList, i, visited, q);
+//             count++;
+//         }
+//     return count;
+// }
 
 /////////////////////// DIAMETER ////////////////////////////////////////////////////////////
 int diameter(const vector<list<int>> &adjList)
@@ -301,7 +301,52 @@ int diameter(const vector<list<int>> &adjList)
     return maxi;
 }
 
+vector<int> topologicalSortBFS(const vector<list<int>> &adjList)
+{
+    int n = adjList.size();
+    vector<int> inDegree(n, 0);
+    queue<int> q;
+    vector<int> result;
 
+    for (int i = 0; i < n; i++)
+    {
+        for (int neighbor : adjList[i])
+        {
+            inDegree[neighbor]++;
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        if (inDegree[i] == 0)
+        {
+            q.push(i);
+        }
+    }
+
+    while (!q.empty())
+    {
+        int current = q.front();
+        q.pop();
+        result.push_back(current);
+
+        for (int neighbor : adjList[current])
+        {
+            inDegree[neighbor]--;
+            if (inDegree[neighbor] == 0)
+            {
+                q.push(neighbor);
+            }
+        }
+    }
+
+    if (result.size() != n)
+    {
+        return vector<int>();
+    }
+
+    return result;
+}
 
 
 int main()
@@ -344,7 +389,8 @@ int main()
         cout << "7. Perform Depth-First Search (DFS)\n";
         cout << "8. No. of SCC \n";
         cout << "9. No. of SCC using BFS\n";
-        cout << "10. Exit\n";
+        cout << "10. Topological Sort\n"; // Option for topological sort
+        cout << "11. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -405,17 +451,35 @@ int main()
         }
         case 9:
         {
-            int abc = SCCbfs(adjList);
-            cout << "The number of strongly connected components (using BFS) is: " << abc << endl;
-            break;
+            // int abc = SCCbfs(adjList);
+            // cout << "The number of strongly connected components (using BFS) is: " << abc << endl;
+            // break;
         }
         case 10:
+        {
+            vector<int> topologicalOrder = topologicalSortBFS(adjList);
+            if (!topologicalOrder.empty())
+            {
+                cout << "Topological Sort: ";
+                for (int node : topologicalOrder)
+                {
+                    cout << node << " ";
+                }
+                cout << endl;
+            }
+            else
+            {
+                cout << "Topological sorting is not possible. The graph contains a cycle." << endl;
+            }
+            break;
+        }
+        case 11:
         {
             cout << "Exiting the program." << endl;
             return 0;
         }
         }
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }

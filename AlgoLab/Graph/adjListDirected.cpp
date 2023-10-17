@@ -309,67 +309,71 @@ int main()
         switch (choice)
         {
         case 1:
-            {
+        {
             listAllEdges(adjList);
             break;
-            }
+        }
         case 2:
-            {
+        {
             int i, j;
             cout << "Enter the nodes to connect: ";
             cin >> i >> j;
             insertEdge(adjList, i, j);
             break;
-            }
+        }
         case 3:
-            {
-            int i,j;
+        {
+            int i, j;
             cout << "Enter the nodes to disconnect: ";
             cin >> i >> j;
             deleteEdge(adjList, i, j);
             break;
-            }
+        }
         case 4:
-            {
+        {
             addNode(adjList);
             break;
-            }
+        }
         case 5:
-            {
+        {
             printAdjList(adjList);
             break;
-            }
+        }
         case 6:
-            {
+        {
             int startNodeBFS;
             cout << "Enter the starting node for BFS: ";
             cin >> startNodeBFS;
             BFS(adjList, startNodeBFS);
             break;
-            }
+        }
         case 7:
-            {
+        {
             int startNodeDFS;
             cout << "Enter the starting node for DFS: ";
             cin >> startNodeDFS;
             DFS(adjList, startNodeDFS);
             break;
-            }
+        }
         case 8:
-            {
+        {
             auto tempp = SCC(adjList);
             cout << "The number of strongly connected components (using KOSARAJU algorithm) is: " << tempp << endl;
             break;
-            }
+        }
         case 9:
-            {
+        {
             int abc = SCCbfs(adjList);
             cout << "The number of strongly connected components (using BFS) is: " << abc << endl;
             break;
-            }
         }
-    }
-    while (choice != 10);
+        case 10:
+        {
+            cout << "Exiting the program." << endl;
+            return 0;
+        }
+        }
+    } while (choice != 10);
 
     return 0;
 }

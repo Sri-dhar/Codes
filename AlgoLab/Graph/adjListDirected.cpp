@@ -159,7 +159,7 @@ void DFS(const vector<list<int>> &adjList, int startNode)
 /////////////////////For no. of strongly connected component ///////////////////////////////
 // KOSARAJU ALGORITHM
 
-void DFSUtil(const vector<list<int>> &adjList, int startNode, vector<bool> &visited, stack<int> &s)
+void DFShelper(const vector<list<int>> &adjList, int startNode, vector<bool> &visited, stack<int> &s)
 {
     visited[startNode] = true;
 
@@ -167,7 +167,7 @@ void DFSUtil(const vector<list<int>> &adjList, int startNode, vector<bool> &visi
     {
         if (!visited[neighbor])
         {
-            DFSUtil(adjList, neighbor, visited, s);
+            DFShelper(adjList, neighbor, visited, s);
         }
     }
 
@@ -200,17 +200,17 @@ void BFSUtil(const vector<list<int>> &adjList, int startNode, vector<bool> &visi
 vector<list<int>> Grev(const vector<list<int>> &adjList)
 {
     int n = adjList.size();
-    vector<list<int>> transposedAdjList(n);
+    vector<list<int>> adjListRev(n);
 
     for (int i = 0; i < n; i++)
     {
         for (int neighbor : adjList[i])
         {
-            transposedAdjList[neighbor].push_back(i);
+            adjListRev[neighbor].push_back(i);
         }
     }
 
-    return transposedAdjList;
+    return adjListRev;
 }
 
 int SCC(const vector<list<int>> &adjList)
@@ -222,11 +222,11 @@ int SCC(const vector<list<int>> &adjList)
 
     for (int i = 0; i < n; i++)
         if (!visited[i])
-            DFSUtil(adjList, i, visited, s);
+            DFShelper(adjList, i, visited, s);
+    //stack at this moment contains nodes in order of thier finish time//
 
-    vector<list<int>> transposedAdjList = Grev(adjList);
+    vector<list<int>> adjListRev = Grev(adjList);
     fill(visited.begin(), visited.end(), false);
-
     int ans = 0;
 
     while (!s.empty())
@@ -237,7 +237,7 @@ int SCC(const vector<list<int>> &adjList)
         if (!visited[current])
         {
             stack<int> componentStack;
-            DFSUtil(transposedAdjList, current, visited, componentStack);
+            DFShelper(adjListRev, current, visited, componentStack);
             ans++;
         }
     }

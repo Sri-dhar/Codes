@@ -202,6 +202,40 @@ void AdvancedDFS(const vector<pair<int, list<int>>>& adjList) {
     }
 }
 
+////////////////////////////BIPARTITE/////////////////////////////////////
+bool isBipartite(const vector<pair<int,list<int>>>& adjList) 
+{
+    int n = adjList.size();
+    vector<int> color(n, -1);  
+    for (int startNode = 0; startNode < n; startNode++) 
+    {
+
+        if (color[startNode] != -1) continue;
+        color[startNode] = 0; 
+
+        queue<int> q;
+        q.push(startNode);
+
+        while (!q.empty()) 
+        {
+            int current = q.front();
+            q.pop();
+
+            for (int neighbor : adjList[current].second) 
+            {
+                if (color[neighbor] == -1) 
+                {
+                    color[neighbor] = 1 - color[current];  
+                    q.push(neighbor);
+                } 
+                else if (color[neighbor] == color[current]) return false; 
+            }
+        }
+    }
+    return true; 
+}
+///////////////////////////////////ENDS HERE/////////////////////////////////
+
 int main() {
     cout << "Enter the number of nodes: ";
     int n;

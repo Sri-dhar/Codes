@@ -274,7 +274,8 @@ int main() {
         cout << "7. Perform Depth-First Search (DFS)\n";
         cout << "8. Perform Advanced DFS\n";
         cout << "9. Check if graph is connected or not\n";
-        cout << "10. Exit\n";
+        cout << "10. Check if graph is bipartite of not\n ";
+        cout << "11. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -317,13 +318,17 @@ int main() {
             case 9:
                 checkIfConnected(adjList);
                 break;
-            case 10:
+            case 10: 
+                bool a = isBipartite(adjList);
+                if(a) cout<<"The graph is bipartite\n";
+                else cout<<"The graph is not bipartite\n";
+            case 11:
                 cout << "Exiting...\n";
                 break;
             default:
                 cout << "Invalid choice\n";
         }
-    } while (choice != 10);
+    } while (choice != 11);
 
     return 0;
 }

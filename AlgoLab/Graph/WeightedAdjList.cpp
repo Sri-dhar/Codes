@@ -18,7 +18,7 @@ void printList(const vector<list<pair<int, int>>> &adjList)
 
 void findMSTprims(const vector<list<pair<int, int>>> &adjList)
 {
-    map<int,pair<int,int>> mp; // map contains the pair and their weights
+    map<int, pair<int, int>> mp; // map contains the pair and their weights
     for (int i = 0; i < adjList.size(); i++)
     {
         for (auto &edge : adjList[i])
@@ -39,10 +39,23 @@ void findMSTprims(const vector<list<pair<int, int>>> &adjList)
     //     cout << "Edge: " << node1 << " - " << node2 << " Weight: " << weight << endl;
     // }
     priority_queue<
-        pair<int, std::pair<int, int>>,  
-        vector<std::pair<int, std::pair<int, int>>>,  
-        greater<std::pair<int, std::pair<int, int>>>  
-    > minHeap;
+        pair<int, std::pair<int, int>>,
+        vector<std::pair<int, std::pair<int, int>>>,
+        greater<std::pair<int, std::pair<int, int>>>>
+        minHeap;
+
+    for (auto &pair : mp)
+    {
+        int weight = pair.first;
+        int node1 = pair.second.first;
+        int node2 = pair.second.second;
+        minHeap.push(make_pair(weight, make_pair(node1, node2)));
+    }//all elements of the map are now in the tree
+
+    vector<pair<int, std::pair<int, int>>> tree;
+
+    tree.push_back(minHeap.top());
+
 }
 
 int main()

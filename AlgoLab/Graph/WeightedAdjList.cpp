@@ -23,7 +23,6 @@ struct Edge {
 };
 
 void findMSTprims2(const vector<list<pair<int, int>>> &adjList) {
-    vector<bool> inMST(adjList.size(), false);
     vector<pair<int, pair<int, int>>> vec;
 
     for (int i = 0; i < adjList.size(); i++) {
@@ -36,6 +35,7 @@ void findMSTprims2(const vector<list<pair<int, int>>> &adjList) {
 
     sort(vec.begin(), vec.end());
 
+    vector<bool> isInMST(adjList.size(), false);
     int MSTweight = 0;
     vector<Edge> MSTedges;
 
@@ -47,10 +47,10 @@ void findMSTprims2(const vector<list<pair<int, int>>> &adjList) {
         int v = edge.second.second;
         int weight = edge.first;
 
-        if (!inMST[u] || !inMST[v]) {
+        if (!isInMST[u] || !isInMST[v]) {
             MSTweight += weight;
-            inMST[u] = true;
-            inMST[v] = true;
+            isInMST[u] = true;
+            isInMST[v] = true;
             MSTedges.push_back({u, v, weight});
         }
     }

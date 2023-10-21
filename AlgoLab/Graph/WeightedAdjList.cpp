@@ -4,6 +4,7 @@ using namespace std;
 
 void printList(const vector<list<pair<int, int>>> &adjList)
 {
+    cout<<"Your Adjacenct List is : "<<endl;
     int n = adjList.size();
     for (int i = 0; i < n; i++)
     {
@@ -14,7 +15,52 @@ void printList(const vector<list<pair<int, int>>> &adjList)
         }
         cout << endl;
     }
+    cout<<endl;
 }
+
+struct Edge {
+    int u, v, weight;
+};
+
+void findMSTprims2(const vector<list<pair<int, int>>> &adjList) {
+    vector<bool> inMST(adjList.size(), false);
+    vector<pair<int, pair<int, int>>> vec;
+
+    for (int i = 0; i < adjList.size(); i++) {
+        for (auto &edge : adjList[i]) {
+            int node = edge.first;
+            int weight = edge.second;
+            vec.push_back(make_pair(weight, make_pair(i, node)));
+        }
+    }
+
+    sort(vec.begin(), vec.end());
+
+    int MSTweight = 0;
+    vector<Edge> MSTedges;
+
+    while (vec.size() > 0) {
+        pair<int, pair<int, int>> edge = vec[0];
+        vec.erase(vec.begin());
+
+        int u = edge.second.first;
+        int v = edge.second.second;
+        int weight = edge.first;
+
+        if (!inMST[u] || !inMST[v]) {
+            MSTweight += weight;
+            inMST[u] = true;
+            inMST[v] = true;
+            MSTedges.push_back({u, v, weight});
+        }
+    }
+
+    cout << "Edges of Minimum Spanning Tree: " << endl;
+    for (const auto &edge : MSTedges) {
+        cout << "Edge: " << edge.u << " - " << edge.v << " Weight: " << edge.weight << endl;
+    }
+}
+
 
 void findMSTprims(const vector<list<pair<int, int>>> &adjList)
 {
@@ -85,6 +131,7 @@ int main()
     }
 
     printList(adjList);
+    findMSTprims2(adjList);
 
     return 0;
 }

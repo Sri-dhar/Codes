@@ -24,7 +24,8 @@ struct Edge
 };
 
 void betterPrims(const vector<list<pair<int, int>>> &adjList)
-{
+{   
+    cout << "Better Prims Output : "<<endl;
     int numNodes = adjList.size();
     priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
     vector<Edge> MSTedges;

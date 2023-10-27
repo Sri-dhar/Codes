@@ -1,30 +1,23 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-using namespace std;
-#define IOS ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-void solve()
+class Solution
 {
-    char a ;
-    string cf = "codeforces";
-    cin>>a;
-    if(cf.find(a)!= string::npos)
+public:
+    vector<int> findDuplicates(vector<int> &nums)
     {
-        cout<<"YES"<<endl;
-    }
-    else cout<<"NO"<<endl;
-}
+        int n = nums.size();
 
-int main()
-{
-    IOS // Uncomment this line if you want to use fast I/O
+        vector<int> result;
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
+        for (int i = 0; i < n; i++)
+        {
+            int x = abs(nums[i]);
+
+            if (nums[x - 1] < 0)
+                result.emplace_back(x);
+
+            else
+                nums[x - 1] = -abs(nums[x - 1]);
+        }
+
+        return result;
     }
-    return 0;
-}
+};

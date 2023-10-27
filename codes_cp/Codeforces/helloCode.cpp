@@ -7,30 +7,17 @@ using namespace std;
 
 void solve()
 {
-    int n;
+    int n ;
     cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-
-    for (int i = 0; i < n; i++)
-        if (a[i] == 1)
-            a[i]++;
-
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i + 1] % a[i] == 0)
-            a[i + 1]++;
-    }
-
-    for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
-    cout << endl;
+    cout<< (n+1)/2 << endl;
+    for(int i=0; i<(n+1)/2; i++)
+        cout<< 3*i+1 <<" "<< 3*(n-i) << endl;
 }
 
 int main()
 {
-    IOS int t = 1;
+    IOS 
+    int t = 1;
     cin >> t;
     while (t--)
     {

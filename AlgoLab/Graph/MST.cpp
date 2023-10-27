@@ -83,6 +83,8 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
 
 int main()
 {
+    freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
     cout << "Enter the number of nodes: ";
     int n;
     cin >> n;

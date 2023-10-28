@@ -80,6 +80,25 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
     }
 }
 
+void MSTkruskal(const vector<list<pair<int, int>>> &adjList)
+{
+    priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
+    for(int i=0; i<adjList.size(); i++)
+    {
+        
+    }
+
+    vector<Edge> MSTedges;
+    vector<int> nodeParent(adjList.size(), -1);
+    
+    for(int i=0; i<adjList.size(); i++)
+    {
+        for(auto &edge : adjList[i])
+        {
+
+        }
+    }
+}
 
 int main()
 {
@@ -111,6 +130,7 @@ int main()
 
     printList(adjList);
     MSTprims(adjList);
+    cout << endl;   
 
     return 0;
 }

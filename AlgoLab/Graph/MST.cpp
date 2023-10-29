@@ -22,12 +22,11 @@ struct Edge
 {
     int u, v, weight;
 
-    bool operator>(const Edge& other) const
+    bool operator>(const Edge &other) const
     {
         return weight > other.weight;
     }
 };
-
 
 void MSTprims(const vector<list<pair<int, int>>> &adjList)
 {
@@ -73,51 +72,60 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
         }
     }
 
-    cout << "Minimum Spanning Tree Edges:" << endl;
+    cout << "Minimum Spanning Tree Edges Using Prims Algorithm:" << endl;
     for (const auto &edge : MSTedges)
     {
-        cout << edge.u << " - " << edge.v << " (weight: " << edge.weight << ")" << endl;
+        cout << edge.u << " - " << edge.v << " with weight: " << edge.weight <<endl;
     }
 }
+int findParent(int node, vector<int>& parent) {
+    if (parent[node] == -1) return node;
+    return findParent(parent[node], parent);
+}
 
-void MSTkruskal(const vector<list<pair<int, int>>> &adjList)
-{
+void MSTkruskal(const vector<list<pair<int, int>>> &adjList) {
     priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
-    int ii = 0;
-    for(auto &edge: adjList)
-    {
-        for(auto &e: edge)
-        {
-            Edge ee;
-            ee.u = ii;
-            ee.v = e.first;
-            ee.weight = e.second;
-            pq.push(ee);
+    
+    vector<int> nodeParent(adjList.size(), -1);
+
+    for (int u = 0; u < adjList.size(); ++u) {
+        for (const auto& edge : adjList[u]) {
+            Edge e;
+            e.u = u;
+            e.v = edge.first;
+            e.weight = edge.second;
+            pq.push(e);
         }
-        ii++;
     }
 
     vector<Edge> MSTedges;
-    vector<int> nodeParent(adjList.size(), -1);
-    
-    while(!pq.empty())
-    {
-        
+
+    while (!pq.empty()) {
+        Edge currentEdge = pq.top();
+        pq.pop();
+        int u = currentEdge.u;
+        int v = currentEdge.v;
+        int weight = currentEdge.weight;
+
+        int parentU = findParent(u, nodeParent);
+        int parentV = findParent(v, nodeParent);
+
+        if (parentU != parentV) {
+            MSTedges.push_back(currentEdge);
+            nodeParent[parentU] = parentV;
+        }
     }
 
-    // for(int i=0; i<adjList.size(); i++)
-    // {
-    //     for(auto &edge : adjList[i])
-    //     {
-
-    //     }
-    // }
+    cout << "Minimum Spanning Tree Edges Using Kruskal Algorithm:" << endl;
+    for (const auto& edge : MSTedges) {
+        cout << edge.u << " - " << edge.v << " with weight: " << edge.weight << endl;
+    }
 }
 
 int main()
 {
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     cout << "Enter the number of nodes: ";
     int n;
     cin >> n;
@@ -144,7 +152,10 @@ int main()
 
     printList(adjList);
     MSTprims(adjList);
-    cout << endl;   
+    cout << endl;
+    cout << endl;
+    MSTkruskal(adjList);
+    cout<<endl;
 
     return 0;
 }

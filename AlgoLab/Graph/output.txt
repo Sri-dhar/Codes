@@ -11,10 +11,20 @@ Node 4 is connected to: 0 (weight: 2) 2 (weight: 6) 3 (weight: 5) 6 (weight: 4)
 Node 5 is connected to: 3 (weight: 2) 6 (weight: 3) 
 Node 6 is connected to: 4 (weight: 4) 5 (weight: 3) 
 
-Minimum Spanning Tree Edges:
-0 - 2 (weight: 1)
-0 - 4 (weight: 2)
-4 - 6 (weight: 4)
-6 - 5 (weight: 3)
-5 - 3 (weight: 2)
-3 - 1 (weight: 1)
+Minimum Spanning Tree Edges Using Prims Algorithm:
+0 - 2 with weight: 1
+0 - 4 with weight: 2
+4 - 6 with weight: 4
+6 - 5 with weight: 3
+5 - 3 with weight: 2
+3 - 1 with weight: 1
+
+
+Minimum Spanning Tree Edges Using Kruskal Algorithm:
+0 - 2 with weight: 1
+1 - 3 with weight: 1
+5 - 3 with weight: 2
+4 - 0 with weight: 2
+6 - 5 with weight: 3
+4 - 6 with weight: 4
+

@@ -143,6 +143,7 @@ void Dijkstra(const vector<list<pair<int, int>>> &adjList, int startNode)
     int n = adjList.size();
     vector<int> distance (n,INT_MAX);
     vector<bool> visited (n,false);
+    vector<int> parent (n,-1);
 
     distance[startNode] = 0;
     priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
@@ -152,7 +153,36 @@ void Dijkstra(const vector<list<pair<int, int>>> &adjList, int startNode)
 
     }
     
+}  
+
+void SSSP_BFS(const vector<list<pair<int, int>>> &adjList, int src) {
+  int n = adjList.size(); 
+  vector<int> dist(n, INT_MAX);
+  dist[src] = 0;
+
+  queue<int> q;
+  q.push(src);
+
+  while(!q.empty()) {
+    int u = q.front();
+    q.pop();
     
+    for(auto edge : adjList[u]) {
+      int v = edge.first;
+      int weight = edge.second;
+      
+      if(dist[v] > dist[u] + weight) {
+        dist[v] = dist[u] + weight;
+        q.push(v);  
+      }
+    }
+  }
+
+  cout<<"Shortest Distance Using BFS Output : \n";
+  for(int i = 0; i < n; i++) {
+    cout << "Node " << i << " ==> " << dist[i] << endl; 
+  }
+}
 
 
 int main()
@@ -190,7 +220,7 @@ int main()
     MSTkruskal(adjList);
     cout << endl;
     cout << endl;
-    Dijkstra(adjList,0);
+    SSSP_BFS(adjList,0);
     return 0;
 }
 // 7

@@ -28,3 +28,12 @@ Minimum Spanning Tree Edges Using Kruskal Algorithm:
 6 - 5 with weight: 3
 4 - 6 with weight: 4
 
+
+Shortest Path Using BFS Output : 
+Node 0 ==> 0
+Node 1 ==> 8
+Node 2 ==> 1
+Node 3 ==> 7
+Node 4 ==> 2
+Node 5 ==> 9
+Node 6 ==> 6

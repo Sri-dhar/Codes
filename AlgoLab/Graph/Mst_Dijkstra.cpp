@@ -51,8 +51,7 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
         pq.pop();
 
         int u = currentEdge.v;
-        if (visited[u])
-            continue;
+        if (visited[u]) continue;
 
         visited[u] = true;
         MSTedges.push_back(currentEdge);
@@ -68,6 +67,12 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
                 e.v = v;
                 e.weight = weight;
                 pq.push(e);
+                //if we want to write code as per the given algo
+                //we can do it in less time using the following
+                // struct Edge {
+                //     int u, v, weight;
+                //     bool deleted; // Flag to mark if the edge is deleted
+                // };                
             }
         }
     }

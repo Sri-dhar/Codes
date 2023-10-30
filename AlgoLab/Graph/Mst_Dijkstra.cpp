@@ -51,7 +51,8 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
         pq.pop();
 
         int u = currentEdge.v;
-        if (visited[u]) continue;
+        if (visited[u])
+            continue;
 
         visited[u] = true;
         MSTedges.push_back(currentEdge);
@@ -67,12 +68,12 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
                 e.v = v;
                 e.weight = weight;
                 pq.push(e);
-                //if we want to write code as per the given algo
-                //we can do it in less time using the following
-                // struct Edge {
-                //     int u, v, weight;
-                //     bool deleted; // Flag to mark if the edge is deleted
-                // };                
+                // if we want to write code as per the given algo
+                // we can do it in less time using the following
+                //  struct Edge {
+                //      int u, v, weight;
+                //      bool deleted; // Flag to mark if the edge is deleted
+                //  };
             }
         }
     }
@@ -80,22 +81,27 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
     cout << "Minimum Spanning Tree Edges Using Prims Algorithm:" << endl;
     for (const auto &edge : MSTedges)
     {
-        cout << edge.u << " - " << edge.v << " with weight: " << edge.weight <<endl;
+        cout << edge.u << " - " << edge.v << " with weight: " << edge.weight << endl;
     }
 }
 
-int findParent(int node, vector<int>& parent) {
-    if (parent[node] == -1) return node;
+int findParent(int node, vector<int> &parent)
+{
+    if (parent[node] == -1)
+        return node;
     return findParent(parent[node], parent);
 }
 
-void MSTkruskal(const vector<list<pair<int, int>>> &adjList) {
+void MSTkruskal(const vector<list<pair<int, int>>> &adjList)
+{
     priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
-    
+
     vector<int> nodeParent(adjList.size(), -1);
 
-    for (int u = 0; u < adjList.size(); ++u) {
-        for (const auto& edge : adjList[u]) {
+    for (int u = 0; u < adjList.size(); ++u)
+    {
+        for (const auto &edge : adjList[u])
+        {
             Edge e;
             e.u = u;
             e.v = edge.first;
@@ -106,7 +112,8 @@ void MSTkruskal(const vector<list<pair<int, int>>> &adjList) {
 
     vector<Edge> MSTedges;
 
-    while (!pq.empty()) {
+    while (!pq.empty())
+    {
         Edge currentEdge = pq.top();
         pq.pop();
         int u = currentEdge.u;
@@ -116,19 +123,37 @@ void MSTkruskal(const vector<list<pair<int, int>>> &adjList) {
         int parentU = findParent(u, nodeParent);
         int parentV = findParent(v, nodeParent);
 
-        if (parentU != parentV) {
+        if (parentU != parentV)
+        {
             MSTedges.push_back(currentEdge);
             nodeParent[parentU] = parentV;
         }
     }
 
     cout << "Minimum Spanning Tree Edges Using Kruskal Algorithm:" << endl;
-    for (const auto& edge : MSTedges) {
+    for (const auto &edge : MSTedges)
+    {
         cout << edge.u << " - " << edge.v << " with weight: " << edge.weight << endl;
     }
 }
 
-void Dijkstra(const vector<list<pair<int, int>>> &adjList)
+//  DIJKSTRA ALGORITHM
+void Dijkstra(const vector<list<pair<int, int>>> &adjList, int startNode)
+{
+    int n = adjList.size();
+    vector<int> distance (n,INT_MAX);
+    vector<bool> visited (n,false);
+
+    distance[startNode] = 0;
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+    pq.push({0,startNode});
+    while(!pq.empty())
+    {
+        
+    }
+    
+    
+
 
 int main()
 {
@@ -163,20 +188,21 @@ int main()
     cout << endl;
     cout << endl;
     MSTkruskal(adjList);
-    cout<<endl;
-
+    cout << endl;
+    cout << endl;
+    Dijkstra(adjList,0);
     return 0;
 }
 // 7
 // 2
 // 2 1 4 2
-// 2 
+// 2
 // 2 7 3 1
 // 1
 // 4 6
-// 2 
+// 2
 // 4 5 5 2
-// 1 
+// 1
 // 6 4
 // 1
 // 6 3

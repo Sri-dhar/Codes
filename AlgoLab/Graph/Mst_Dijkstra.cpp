@@ -149,7 +149,7 @@ void Dijkstra(const vector<list<pair<int, int>>> &adjList, int startNode)
     pq.push({0,startNode});
     while(!pq.empty())
     {
-        
+
     }
     
     
@@ -207,3 +207,46 @@ int main()
 // 1
 // 6 3
 // 0 testcase
+
+
+/*  NOT WORKING
+    
+    void Dijkstra(const vector<list<pair<int, int>>> &adjList) {
+    int numNodes = adjList.size();
+    vector<int> X(numNodes, 0);
+    vector<int> shortestDistances(numNodes, INT_MAX);
+    shortestDistances[0] = 0;
+    X[0] = 1;
+
+    while (true) {
+        int source = -1, target = -1;
+        int minDistance = INT_MAX;
+
+        for (int v = 0; v < numNodes; ++v) {
+            if (X[v] == 1) {
+                for (const auto &edge : adjList[v]) {
+                    int w = edge.first;
+                    int weight = edge.second;
+                    if (X[w] == 0 && shortestDistances[v] + weight < minDistance) {
+                        minDistance = shortestDistances[v] + weight;
+                        source = v;
+                        target = w;
+                    }
+                }
+            }
+        }
+
+        if (source == -1 || target == -1) {
+            break;
+        }
+
+        X[target] = 1;
+        shortestDistances[target] = shortestDistances[source] + adjList[source][target];
+    }
+
+    cout << "Shortest Distances from Node 0 using Dijkstra's Algorithm:" << endl;
+    for (int i = 0; i < numNodes; ++i) {
+        cout << "Node " << i << " ==> " << shortestDistances[i] << endl;
+    }
+}
+*/

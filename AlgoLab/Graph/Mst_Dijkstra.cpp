@@ -78,6 +78,7 @@ void MSTprims(const vector<list<pair<int, int>>> &adjList)
         cout << edge.u << " - " << edge.v << " with weight: " << edge.weight <<endl;
     }
 }
+
 int findParent(int node, vector<int>& parent) {
     if (parent[node] == -1) return node;
     return findParent(parent[node], parent);
@@ -121,6 +122,8 @@ void MSTkruskal(const vector<list<pair<int, int>>> &adjList) {
         cout << edge.u << " - " << edge.v << " with weight: " << edge.weight << endl;
     }
 }
+
+void Dijkstra(const vector<list<pair<int, int>>> &adjList)
 
 int main()
 {

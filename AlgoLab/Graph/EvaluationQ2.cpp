@@ -4,27 +4,12 @@ using namespace std;
 
 typedef pair<int, int> PairOfInt;
 
-class Graph {
-    int V;
-    list< PairOfInt > *adj;
-
-public:
-    Graph(int V);
-    void addEdge(int u, int v, int w);
-    void primMST();
-};
-
-Graph::Graph(int V) {
-    this->V = V;
-    adj = new list<PairOfInt> [V];
-}
-
-void Graph::addEdge(int u, int v, int w) {
+void addEdge(vector<PairOfInt> adj[], int u, int v, int w) {
     adj[u].push_back(make_pair(v, w));
     adj[v].push_back(make_pair(u, w));
 }
 
-void Graph::primMST() {
+void primMST(vector<PairOfInt> adj[], int V) {
     vector<int> key(V, INT_MAX);
     list<int> parent(V, -1);
     vector<bool> inMST(V, false);
@@ -69,7 +54,7 @@ int main() {
     int v;
     cout << "Enter the number of vertices: ";
     cin >> v;
-    Graph g(v);
+    vector<PairOfInt> adj[v];
     cout << "Enter the number of edges: ";
     int e;
     cin >> e;
@@ -86,10 +71,10 @@ int main() {
 
     for(auto edge: edges)
     {
-        g.addEdge(edge.second.first, edge.second.second, edge.first);
+        addEdge(adj, edge.second.first, edge.second.second, edge.first);
     }
     cout << endl;
-    g.primMST();
+    primMST(adj, v);
 
     return 0;
 }

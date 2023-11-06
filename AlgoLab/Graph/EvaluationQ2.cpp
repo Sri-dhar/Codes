@@ -93,3 +93,18 @@ int main() {
 
     return 0;
 }
+
+//input
+// 4
+// 5
+// 0 1 2
+// 0 2 3
+// 1 2 1 
+// 1 3 4 
+// 2 3 5
+
+//expected output
+// Enter the number of vertices: Enter the number of edges: Enter the source, destination and weight of edge 1: Enter the source, destination and weight of edge 2: Enter the source, destination and weight of edge 3: Enter the source, destination and weight of edge 4: Enter the source, destination and weight of edge 5: 
+// 0 <==> 1
+// 1 <==> 2
+// 1 <==> 3

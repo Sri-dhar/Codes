@@ -1,5 +1,9 @@
 Enter the number of vertices: Enter the number of edges: Enter the source, destination and weight of edge 1: Enter the source, destination and weight of edge 2: Enter the source, destination and weight of edge 3: Enter the source, destination and weight of edge 4: Enter the source, destination and weight of edge 5: Enter the source, destination and weight of edge 6: Enter the source, destination and weight of edge 7: 
-0 <==> 1
-1 <==> 2
-0 <==> 3
-1 <==> 4
+
+MST Edges
+0<==>1 Weight: 2
+1<==>2 Weight: 3
+1<==>4 Weight: 5
+0<==>3 Weight: 6
+
+Minimum Cost Spanning Tree: 16

@@ -7,7 +7,7 @@ struct Edge {
 
 struct TreeNode {
     int parent;
-    int rank;
+    int unionSizeParameter;
 };
 
 struct Graph {
@@ -30,17 +30,17 @@ int find(TreeNode tree[], int i) {
     return tree[i].parent;
 }
 
-void Union(TreeNode tree[], int left, int right) {
-    int leftRoot = find(tree, left);
-    int rightRoot = find(tree, right);
+void Union(TreeNode tree[], int branch1, int branch2) {
+    int leftRoot = find(tree, branch1);
+    int rightRoot = find(tree, branch2);
 
-    if (tree[leftRoot].rank < tree[rightRoot].rank)
+    if (tree[leftRoot].unionSizeParameter < tree[rightRoot].unionSizeParameter)
         tree[leftRoot].parent = rightRoot;
-    else if (tree[leftRoot].rank > tree[rightRoot].rank)
+    else if (tree[leftRoot].unionSizeParameter > tree[rightRoot].unionSizeParameter)
         tree[rightRoot].parent = leftRoot;
     else {
         tree[rightRoot].parent = leftRoot;
-        tree[leftRoot].rank++;
+        tree[leftRoot].unionSizeParameter++;
     }
 }
 
@@ -54,24 +54,24 @@ void KruskalMST(Graph* graph) {
     int e = 0;
     int i = 0;
 
-    std::sort(graph->edge, graph->edge + graph->E, compareEdges);
+    sort(graph->edge, graph->edge + graph->E, compareEdges);
 
     TreeNode tree[V];
 
     for (int v = 0; v < V; ++v) {
         tree[v].parent = v;
-        tree[v].rank = 0;
+        tree[v].unionSizeParameter = 0;
     }
 
     while (e < V - 1 && i < graph->E) {
         Edge nextEdge = graph->edge[i++];
 
-        int left = find(tree, nextEdge.src);
-        int right = find(tree, nextEdge.dest);
+        int branch1 = find(tree, nextEdge.src);
+        int branch2 = find(tree, nextEdge.dest);
 
-        if (left != right) {
+        if (branch1 != branch2) {
             result[e++] = nextEdge;
-            Union(tree, left, right);
+            Union(tree, branch1, branch2);
         }
     }
 

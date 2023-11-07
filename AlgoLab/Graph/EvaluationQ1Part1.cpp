@@ -37,9 +37,7 @@ void unionSet(int data1, int data2) {
     int parent1 = findSet(data1);
     int parent2 = findSet(data2);
 
-    if (parent1 == parent2) {
-        return;
-    }
+    if (parent1 == parent2) return;
 
     if (node1->rank >= node2->rank) {
         node2->parent = parent1;
@@ -63,7 +61,8 @@ void unionSet(int data1, int data2) {
     }
 }
 
-vector<vector<int>> getSets() {
+vector<vector<int>> getSets() 
+{
     vector<vector<int>> sets;
     unordered_map<int, bool> visited;
     for (auto it : m) {

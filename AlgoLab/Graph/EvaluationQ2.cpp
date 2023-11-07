@@ -11,11 +11,11 @@ void addEdge(vector<PairOfInt> adj[], int u, int v, int w) {
 
 void primMST(vector<PairOfInt> adj[], int V) {
     vector<int> key(V, INT_MAX);
-    list<int> parent(V, -1);
+    list<int> cuts(V, -1);
     vector<bool> inMST(V, false);
 
     key[0] = 0;
-    parent.push_front(0);
+    cuts.push_front(0);
 
     for (int count = 0; count < V-1; count++) {
         int min = INT_MAX, u;
@@ -32,7 +32,7 @@ void primMST(vector<PairOfInt> adj[], int V) {
 
             if (inMST[v] == false && key[v] > weight) {
                 key[v] = weight;
-                auto it = parent.begin();
+                auto it = cuts.begin();
                 advance(it, v);
                 *it = u;
             }
@@ -40,7 +40,7 @@ void primMST(vector<PairOfInt> adj[], int V) {
     }
 
     for (int i = 1; i < V; ++i) {
-        auto it = parent.begin();
+        auto it = cuts.begin();
         advance(it, i);
         cout << *it << " <==> " << i << endl;
     }

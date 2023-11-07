@@ -187,6 +187,53 @@ void SSSP_BFS(const vector<list<pair<int, int>>> &adjList, int src)
     }
 }
 
+bool hasACycle(const vector<list<pair<int, int>>> &adjList)
+{
+    int n = adjList.size();
+    vector<bool> visited(n, false);
+    vector<int> parent(n, -1);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i])
+        {
+            queue<int> q;
+            q.push(i);
+            visited[i] = true;
+
+            while (!q.empty())
+            {
+                int u = q.front();
+                q.pop();
+
+                for (auto edge : adjList[u])
+                {
+                    int v = edge.first;
+                    if (!visited[v])
+                    {
+                        visited[v] = true;
+                        q.push(v);
+                        parent[v] = u;
+                    }
+                    else if (parent[u] != v)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool hasNegativeWeightCycle( const vector<list<pair<int, int>>> &adjList )
+{
+    if(hasACycle(adjList))
+    {
+        
+    }
+}
+
 int main()
 {
     freopen("input.txt", "r", stdin);
@@ -215,14 +262,19 @@ int main()
         }
     }
 
-    printList(adjList);
+    //printList(adjList);
     MSTprims(adjList);
     cout << endl;
+    // cout << endl;
+    // MSTkruskal(adjList);
+    // cout << endl;
+    // cout << endl;
+    // SSSP_BFS(adjList, 0);
+    // cout << endl;
+    // cout << endl;
+    cout << "Does the graph have a cycle? " << (hasACycle(adjList) ? "\nYes" : "\nNo") << endl;
     cout << endl;
-    MSTkruskal(adjList);
     cout << endl;
-    cout << endl;
-    SSSP_BFS(adjList, 0);
     return 0;
 }
 // 7
@@ -238,7 +290,8 @@ int main()
 // 6 4
 // 1
 // 6 3
-// 0 testcase
+// 0
+// testcase
 
 /*  NOT WORKING
 

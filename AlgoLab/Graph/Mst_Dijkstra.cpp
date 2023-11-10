@@ -228,9 +228,42 @@ bool hasACycle(const vector<list<pair<int, int>>> &adjList)
 
 bool hasNegativeWeightCycle( const vector<list<pair<int, int>>> &adjList )
 {
+    //bellman ford algorithm
     if(hasACycle(adjList))
     {
-        
+        int n = adjList.size();
+        vector<int> dist(n, INT_MAX);
+        dist[0] = 0;
+
+        for(int i = 0; i < n-1; i++)
+        {
+            for(int u = 0; u < n; u++)
+            {
+                for(auto edge : adjList[u])
+                {
+                    int v = edge.first;
+                    int weight = edge.second;
+                    if(dist[v] > dist[u] + weight)
+                    {
+                        dist[v] = dist[u] + weight;
+                    }
+                }
+            }
+        }
+
+        for(int u = 0; u < n; u++)
+        {
+            for(auto edge : adjList[u])
+            {
+                int v = edge.first;
+                int weight = edge.second;
+                if(dist[v] > dist[u] + weight)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 
@@ -275,6 +308,7 @@ int main()
     cout << "Does the graph have a cycle? " << (hasACycle(adjList) ? "\nYes" : "\nNo") << endl;
     cout << endl;
     cout << endl;
+    cout << "Does the graph have a negative cycle? " << (hasNegativeWeightCycle(adjList) ? "\nYes" : "\nNo") << endl;
     return 0;
 }
 // 7

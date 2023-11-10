@@ -1,14 +1,1 @@
-Enter the number of nodes: 
-The code uses zero-based indexing
-Enter an edge only one time
-
-Enter the number of neighbors for node 0: Enter neighbors and corresponding edge weights for node 0 separated by space: Enter the number of neighbors for node 1: Enter neighbors and corresponding edge weights for node 1 separated by space: Enter the number of neighbors for node 2: Enter neighbors and corresponding edge weights for node 2 separated by space: Enter the number of neighbors for node 3: Enter neighbors and corresponding edge weights for node 3 separated by space: Enter the number of neighbors for node 4: Enter neighbors and corresponding edge weights for node 4 separated by space: Enter the number of neighbors for node 5: Enter neighbors and corresponding edge weights for node 5 separated by space: Enter the number of neighbors for node 6: Enter neighbors and corresponding edge weights for node 6 separated by space: Minimum Spanning Tree Edges Using Prims Algorithm:
-0 - 2 with weight: 1
-0 - 4 with weight: 2
-4 - 6 with weight: 4
-6 - 5 with weight: 3
-5 - 3 with weight: 2
-3 - 1 with weight: 1
-
-Does the graph have a cycle? 
-Yes
+1<==>2 Weight : 2

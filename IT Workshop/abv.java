@@ -2,10 +2,8 @@ import java.io.*;
 
 public class abv {
     public static void main(String[] args) {
-        // Create an object to serialize
         Person person = new Person("John", 30);
 
-        // Serialize the object to a file
         try (FileOutputStream fileOut = new FileOutputStream("person.ser");
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(person);
@@ -14,7 +12,6 @@ public class abv {
             e.printStackTrace();
         }
 
-        // Deserialize the object from the file
         try (FileInputStream fileIn = new FileInputStream("person.ser");
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
             Person deserializedPerson = (Person) in.readObject();
@@ -46,3 +43,4 @@ class Person implements Serializable {
         return age;
     }
 }
+

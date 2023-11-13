@@ -517,7 +517,60 @@ vector<int> bellmanFord(vector<list<pair<int, int>>>& adjList, int V, int src) {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-int main()
+// The Floyd-Warshall algorithm is a dynamic programming algorithm
+//  that is used for finding the shortest paths between
+//  all pairs of vertices in a weighted graph, 
+//  including negative weight edges.
+
+void FloydWarshall(vector<list<pair<int, int>>>& adjList, int V) {
+    vector<vector<int>> dist(V, vector<int>(V, INT_MAX));
+    //output is a matrix showing the path distance of ith node with jth node
+    for (int i = 0; i < V; i++) {
+        dist[i][i] = 0;
+        for (auto edge : adjList[i]) {
+            int j = edge.first;
+            int weight = edge.second;
+            dist[i][j] = weight;
+        }
+    }
+
+    for (int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    cout << "The shortest path matrix is:\n";
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (dist[i][j] == INT_MAX)
+                cout << "No Path ";
+            else
+                cout << dist[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+int main() {
+    int V = 4;
+    vector<list<pair<int, int>>> adjList(V);
+    adjList[0].push_back({1, 5});
+    adjList[0].push_back({3, 10});
+    adjList[1].push_back({2, 3});
+    adjList[2].push_back({3, 1});
+
+    FloydWarshall(adjList, V);
+    return 0;
+}
+
+int main2()
 {
     int V = 5;
     vector<list<pair<int, int>>> adjList(V);

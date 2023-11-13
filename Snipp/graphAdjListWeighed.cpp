@@ -480,6 +480,43 @@ bool IsBipartite(vector<list<pair<int, int>>> &adjList, vector<int> &color, int 
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+bool negativeCycle = false;
+//detects negative cycle and finds shortest distance in case of negative cycle
+vector<int> bellmanFord(vector<list<pair<int, int>>>& adjList, int V, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i <= V - 1; i++) {
+        for (int u = 0; u < V; u++) {
+            for (auto edge : adjList[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+                if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                }
+            }
+        }
+    }
+
+    for (int u = 0; u < V; u++) {
+        for (auto edge : adjList[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+            if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+                negativeCycle = true;
+                // Print the negative cycle if needed
+                cout << "Negative Cycle Found!" << endl;
+                return dist; // Returning the shortest distance array even if negative cycle found
+            }
+        }
+    }
+
+    negativeCycle = false;
+    return dist;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
     int V = 5;

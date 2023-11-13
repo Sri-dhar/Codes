@@ -274,6 +274,7 @@ vector<int> TopologicalSort(vector<list<pair<int, int>>> &adjList, int V)
 
     return topologicalOrder;
 }
+
 ///////////////////////////////////////////////////////////
 
 void DFSUtil2(vector<list<pair<int, int>>> &adjList, vector<bool> &visited, vector<int> &finishTime, int &time, int u)
@@ -321,6 +322,163 @@ vector<int> SortByFinishTimeDFS(vector<list<pair<int, int>>> &adjList, int V)
 }
 
 //////////////////////////////////////////
+
+vector<vector<int>> shortestPathFromAllNodes(vector<list<pair<int, int>>> &adjList, int V)
+{
+    vector<vector<int>> dist(V, vector<int>(V, INT_MAX));
+
+    for (int u = 0; u < V; u++)
+    {
+        dist[u][u] = 0;
+        for (auto i = adjList[u].begin(); i != adjList[u].end(); i++)
+        {
+            int v = i->first;
+            int weight = i->second;
+            dist[u][v] = weight;
+        }
+    }
+
+    for (int k = 0; k < V; k++)
+    {
+        for (int u = 0; u < V; u++)
+        {
+            for (int v = 0; v < V; v++)
+            {
+                if (dist[u][k] != INT_MAX && dist[k][v] != INT_MAX && dist[u][k] + dist[k][v] < dist[u][v])
+                {
+                    dist[u][v] = dist[u][k] + dist[k][v];
+                }
+            }
+        }
+    }
+
+    return dist;
+}
+
+//////////////////////////////////////////
+
+int KosarajuNoOfStronglyConnectedComponents(vector<list<pair<int, int>>> &adjList, int V)
+{
+    vector<bool> visited(V, false);
+    vector<int> topologicalOrder = SortByFinishTimeDFS(adjList, V);
+
+    vector<list<pair<int, int>>> reverseAdjList(V);
+
+    for (int u = 0; u < V; u++)
+    {
+        for (auto i = adjList[u].begin(); i != adjList[u].end(); i++)
+        {
+            int v = i->first;
+            int weight = i->second;
+            reverseAdjList[v].push_back(make_pair(u, weight));
+        }
+    }
+
+    int count = 0;
+
+    for (int i = 0; i < V; i++)
+    {
+        visited[i] = false;
+    }
+
+    for (int i = 0; i < V; i++)
+    {
+        int u = topologicalOrder[i];
+        if (!visited[u])
+        {
+            DFSUtil(reverseAdjList, visited, u);
+            count++;
+        }
+    }
+
+    return count;
+}
+///////////////////////////////////////////
+
+void DFSUtilWithPrint(vector<list<pair<int, int>>>& adjList, vector<bool>& visited, int u) {
+    visited[u] = true;
+    cout << u << " ";
+
+    for (auto i = adjList[u].begin(); i != adjList[u].end(); i++) {
+        int v = i->first;
+        if (!visited[v]) {
+            DFSUtilWithPrint(adjList, visited, v);
+        }
+    }
+}
+
+int Kosaraju2NoOfStronglyConnectedComponents(vector<list<pair<int, int>>> &adjList, int V)
+{
+    vector<bool> visited(V, false);
+    vector<int> topologicalOrder = SortByFinishTimeDFS(adjList, V);
+
+    vector<list<pair<int, int>>> reverseAdjList(V);
+
+    for (int u = 0; u < V; u++)
+    {
+        for (auto i = adjList[u].begin(); i != adjList[u].end(); i++)
+        {
+            int v = i->first;
+            int weight = i->second;
+            reverseAdjList[v].push_back(make_pair(u, weight));
+        }
+    }
+
+    int count = 0;
+
+    for (int i = 0; i < V; i++)
+    {
+        visited[i] = false;
+    }
+
+    for (int i = 0; i < V; i++)
+    {
+        int u = topologicalOrder[i];
+        if (!visited[u])
+        {
+            cout << "Strongly Connected Component " << count+1 << ": ";
+            DFSUtilWithPrint(reverseAdjList, visited, u);
+            cout << endl;
+            count++;
+        }
+    }
+
+    return count;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+bool IsBipartite(vector<list<pair<int, int>>> &adjList, vector<int> &color, int u)
+{
+    color[u] = 1;
+
+    queue<int> q;
+    q.push(u);
+
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
+
+        for (auto i = adjList[u].begin(); i != adjList[u].end(); i++)
+        {
+            int v = i->first;
+            if (color[v] == -1)
+            {
+                color[v] = 1 - color[u];
+                q.push(v);
+            }
+            else if (color[v] == color[u])
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {

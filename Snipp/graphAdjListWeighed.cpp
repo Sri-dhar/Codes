@@ -54,7 +54,6 @@ void DFSUtil(vector<list<pair<int, int>>> &adjList, vector<bool> &visited, int u
         }
     }
 }
-
 void DFS(vector<list<pair<int, int>>> &adjList, int V, int start)
 {
     vector<bool> visited(V, false);
@@ -63,8 +62,6 @@ void DFS(vector<list<pair<int, int>>> &adjList, int V, int start)
 
 bool hasCycle(vector<list<pair<int, int>>> &adjList, vector<bool> &visited, int u, int parent)
 {
-
-    // u is starting node
     visited[u] = true;
 
     for (auto i = adjList[u].begin(); i != adjList[u].end(); i++)
@@ -85,6 +82,7 @@ bool hasCycle(vector<list<pair<int, int>>> &adjList, vector<bool> &visited, int 
 
     return false;
 }
+
 
 void PrimsMinimumSpanningTree(vector<list<pair<int, int>>> &adjList, int V)
 {
@@ -557,7 +555,101 @@ void FloydWarshall(vector<list<pair<int, int>>>& adjList, int V) {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-int main() {
+int main()
+{
+    int V = 6;
+
+    vector<list<pair<int, int>>> adjList(V);
+
+    addEdge(adjList, 0, 1, 2);
+    addEdge(adjList, 0, 2, 4);
+    addEdge(adjList, 1, 2, 1);
+    addEdge(adjList, 1, 3, 7);
+    addEdge(adjList, 2, 4, 3);
+    addEdge(adjList, 3, 4, 1);
+    addEdge(adjList, 3, 5, 5);
+    addEdge(adjList, 4, 5, 2);
+
+    cout << "BFS traversal starting from node 0: ";
+    BFS(adjList, V, 0);
+    cout << endl;
+
+    cout << "DFS traversal starting from node 0: ";
+    DFS(adjList, V, 0);
+    cout << endl;
+
+    vector<bool> qq(V, false);
+    cout << "Checking for cycle in the graph: ";
+    if (hasCycle(adjList, qq, 0, -1))
+        cout << "Cycle exists." << endl;
+    else
+        cout << "No cycle in the graph." << endl;
+
+    cout << "Prim's Minimum Spanning Tree:\n";
+    PrimsMinimumSpanningTree(adjList, V);
+
+    cout << "Kruskal's Minimum Spanning Tree:\n";
+    KruskalMinimumSpanningTree(adjList, V);
+
+    cout << "Dijkstra's Shortest Distance from node 0:\n";
+    vector<int> dijkstraDistances = DijkstraShortestDistanceOfAllNodesFromSource(adjList, V, 0);
+    for (int i = 0; i < V; i++)
+    {
+        cout << "Node " << i << ": " << dijkstraDistances[i] << endl;
+    }
+
+    cout << "Topological Sort of the Graph: ";
+    vector<int> topologicalOrder = TopologicalSort(adjList, V);
+    for (int node : topologicalOrder)
+    {
+        cout << node << " ";
+    }
+    cout << endl;
+
+    cout << "Shortest Paths between all pairs using Floyd-Warshall:\n";
+    vector<vector<int>> allPairsShortestPaths = shortestPathFromAllNodes(adjList, V);
+    for (int i = 0; i < V; i++)
+    {
+        for (int j = 0; j < V; j++)
+        {
+            cout << "Shortest path from " << i << " to " << j << ": " << allPairsShortestPaths[i][j] << endl;
+        }
+    }
+
+    cout << "Number of Strongly Connected Components using Kosaraju's Algorithm: " << KosarajuNoOfStronglyConnectedComponents(adjList, V) << endl;
+
+    cout << "Strongly Connected Components using Kosaraju's Algorithm:\n";
+    int components = Kosaraju2NoOfStronglyConnectedComponents(adjList, V);
+
+    cout << "Is the graph Bipartite? ";
+    vector<int> color(V, -1);
+    if (IsBipartite(adjList, color, 0))
+        cout << "Yes, it is Bipartite." << endl;
+    else
+        cout << "No, it is not Bipartite." << endl;
+
+    addEdge(adjList, 5, 3, -1);
+    cout << "Bellman-Ford Shortest Distance from node 0:\n";
+    vector<int> bellmanFordDistances = bellmanFord(adjList, V, 0);
+    for (int i = 0; i < V; i++)
+    {
+        cout << "Node " << i << ": " << bellmanFordDistances[i] << endl;
+    }
+
+    if (negativeCycle)
+        cout << "Graph contains a negative cycle." << endl;
+    else
+        cout << "Graph does not contain a negative cycle." << endl;
+
+    cout << "Floyd-Warshall Shortest Paths:\n";
+    FloydWarshall(adjList, V);
+
+    return 0;
+}
+
+
+
+int main1() {
     int V = 4;
     vector<list<pair<int, int>>> adjList(V);
     adjList[0].push_back({1, 5});

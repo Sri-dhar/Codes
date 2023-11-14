@@ -55,3 +55,4 @@ int main() {
     KMP(text, pattern);
     return 0;
 }
+

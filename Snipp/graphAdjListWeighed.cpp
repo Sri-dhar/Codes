@@ -504,9 +504,8 @@ vector<int> bellmanFord(vector<list<pair<int, int>>>& adjList, int V, int src) {
             int weight = edge.second;
             if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
                 negativeCycle = true;
-                // Print the negative cycle if needed
                 cout << "Negative Cycle Found!" << endl;
-                return dist; // Returning the shortest distance array even if negative cycle found
+                return dist;
             }
         }
     }

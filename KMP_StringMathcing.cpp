@@ -47,10 +47,13 @@ void KMP(const std::string& text, const std::string& pattern) {
         if (j == patternLength) {
             std::cout << "Pattern found at index " << i - j << std::endl;
             j = pie[j - 1];
-        } else if (i < textLength && pattern[j] != text[i]) {
+        } 
+        else if (i < textLength && pattern[j] != text[i]) 
+        {
             if (j != 0) {
                 j = pie[j - 1];
-            } else {
+            } 
+            else {
                 i++;
             }
         }
@@ -77,3 +80,49 @@ int main() {
 
     return 0;
 }
+
+
+// // pseudo code
+// Function computeLPS(pattern)
+//     Initialize patternLength as the length of pattern
+//     Initialize pie as an array of size patternLength with all elements as 0
+//     Initialize len as 0
+
+//     For i from 1 to patternLength
+//         If pattern[i] is equal to pattern[len]
+//             Increment len
+//             Set pie[i] to len
+//             Increment i
+//         Else
+//             If len is not 0
+//                 Set len to pie[len - 1]
+//             Else if len is 0
+//                 Set pie[i] to 0
+//                 Increment i
+//     Return pie
+
+// Function KMP(text, pattern)
+//     Initialize textLength as the length of text
+//     Initialize patternLength as the length of pattern
+//     Compute the LPS array by calling computeLPS(pattern)
+
+//     Initialize i and j as 0
+
+//     While i is less than textLength
+//         If pattern[j] is equal to text[i]
+//             Increment i and j
+//         If j is equal to patternLength
+//             Print "Pattern found at index " and (i - j)
+//             Set j to pie[j - 1]
+//         Else if i is less than textLength and pattern[j] is not equal to text[i]
+//             If j is not 0
+//                 Set j to pie[j - 1]
+//             Else
+//                 Increment i
+
+// Function main
+//     Declare text and pattern as strings
+//     Prompt user to enter the text and pattern
+//     Call KMP(text, pattern)
+//     Compute LPS array by calling computeLPS(pattern)
+//     Print all elements of LPS array

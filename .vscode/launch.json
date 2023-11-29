@@ -39,8 +39,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/Codes/AlgoLab",
-      "program": "f:/Codes/AlgoLab/build/Debug/outDebug",
+      "cwd": "f:/github/Codes",
+      "program": "f:/github/Codes/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

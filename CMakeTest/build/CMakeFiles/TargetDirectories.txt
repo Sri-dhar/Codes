@@ -1,0 +1,5 @@
+/home/ketone/Codes/build/CMakeFiles/graph.dir
+/home/ketone/Codes/build/CMakeFiles/run.dir
+/home/ketone/Codes/build/CMakeFiles/default.dir
+/home/ketone/Codes/build/CMakeFiles/edit_cache.dir
+/home/ketone/Codes/build/CMakeFiles/rebuild_cache.dir

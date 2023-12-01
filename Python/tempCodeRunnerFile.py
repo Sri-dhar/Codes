@@ -1,7 +1,6 @@
 
-#reordering a list
-fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
-newlist = []
-import random
-random.shuffle(fruits)
-print(fruits)
+i = 3
+j = 5
+while not i>5:
+    print(i)
+    i += 1

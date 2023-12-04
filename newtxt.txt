@@ -1,0 +1,3 @@
+new file created
+
+now will commit and sync after giving commit message

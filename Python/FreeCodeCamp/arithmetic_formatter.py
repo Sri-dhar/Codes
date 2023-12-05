@@ -1,4 +1,4 @@
-def arithmetic_arranger(problems):
+def arithmetic_arranger(problems, boolE):
 
     err1 = "Error: Too many problems."
     err2 = "Error: Operator must be '+' or '-'."
@@ -35,6 +35,37 @@ def arithmetic_arranger(problems):
             resultsArray.append(int(problem.split(" ")[0]) - int(problem.split(" ")[2]))
     
     #printing work
-    
+    #get the first line
+    firstLine = ""
+    for problem in problems:
+        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
+            firstLine = firstLine + "  " + problem.split(" ")[0]
+        else:
+            firstLine = firstLine + "  " + problem.split(" ")[2]
+    arranged_problems = firstLine + "\n"
+
+    secondLine = ""
+    for problem in problems:
+        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
+            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[0]
+        else:
+            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[2]
+    arranged_problems = arranged_problems + secondLine + "\n"
+
+    thirdLine = "" #dashes one
+    for noOfDash in noOfDashArr:
+        thirdLine = thirdLine + "-" * noOfDash
+        thirdLine = thirdLine + "    "
+    arranged_problems = arranged_problems + thirdLine + "\n"
+
+    if(boolE):
+        fourthLine = "" #result
+        for result in resultsArray:
+            fourthLine = fourthLine + str(result)
+            fourthLine = fourthLine + "    "
+        arranged_problems = arranged_problems + fourthLine + "\n"
 
     return arranged_problems
+
+result = arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"], True)
+print(result)

@@ -1,71 +1,77 @@
-def arithmetic_arranger(problems, boolE):
-
+def arithmetic_arranger(problems, answer=False):
     err1 = "Error: Too many problems."
     err2 = "Error: Operator must be '+' or '-'."
     err3 = "Error: Numbers must only contain digits."
     err4 = "Error: Numbers cannot be more than four digits."
 
-    if problems.__len__() > 5:
+    if len(problems) > 5:
         return err1
-    
+
+    first_operand = []
+    second_operand = []
+    operator = []
+    #Declaring lines
+    first_line = []
+    second_line = []
+    third_line = []
+    fourth_line = []
+
     for problem in problems:
-        if problem.split(" ")[1] != "+" and problem.split(" ")[1] != "-":
-            return err2
-        if not problem.split(" ")[0].isnumeric() or not problem.split(" ")[2].isnumeric():
+        pieces = problem.split()
+        first_operand.append(pieces[0])
+        operator.append(pieces[1])
+        second_operand.append(pieces[2])
+
+    if "/" in operator or "*" in operator:
+        return err2
+
+    for i in range(len(first_operand)):
+        if not (first_operand[i].isdigit() and second_operand[i].isdigit()):
             return err3
-        if problem.split(" ")[0].__len__() > 4 or problem.split(" ")[2].__len__() > 4:
+
+    for i in range(len(first_operand)):
+        if len(first_operand[i]) > 4 or len(second_operand[i]) > 4:
             return err4
-        
-    noOfDash = 0
-    noOfDashArr = list()
-    for problem in problems:
-        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
-            noOfDash = problem.split(" ")[0].__len__() + 2
+
+
+    for i in range(len(first_operand)):
+        if len(first_operand[i]) > len(second_operand[i]):
+            first_line.append(" " * 2 + first_operand[i])
         else:
-            noOfDash = problem.split(" ")[2].__len__() + 2
-        noOfDashArr.append(noOfDash)
-    
-    arranged_problems = ""
+            first_line.append(" " * (len(second_operand[i]) - len(first_operand[i]) + 2) + first_operand[i])
 
-    resultsArray = list()
-    for problem in problems:
-        if problem.split(" ")[1] == "+":
-            resultsArray.append(int(problem.split(" ")[0]) + int(problem.split(" ")[2]))
+    for i in range(len(second_operand)):
+        if len(second_operand[i]) > len(first_operand[i]):
+            second_line.append(operator[i] + " " + second_operand[i])
         else:
-            resultsArray.append(int(problem.split(" ")[0]) - int(problem.split(" ")[2]))
-    
-    #printing work
-    #get the first line
-    firstLine = ""
-    for problem in problems:
-        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
-            firstLine = firstLine + "  " + problem.split(" ")[0]
-        else:
-            firstLine = firstLine + "  " + problem.split(" ")[2]
-    arranged_problems = firstLine + "\n"
+            second_line.append(operator[i] + " " * (len(first_operand[i]) - len(second_operand[i]) + 1) + second_operand[i])
 
-    secondLine = ""
-    for problem in problems:
-        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
-            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[0]
-        else:
-            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[2]
-    arranged_problems = arranged_problems + secondLine + "\n"
+    for i in range(len(first_operand)):
+        third_line.append("-" * (max(len(first_operand[i]), len(second_operand[i])) + 2))
 
-    thirdLine = "" #dashes one
-    for noOfDash in noOfDashArr:
-        thirdLine = thirdLine + "-" * noOfDash
-        thirdLine = thirdLine + "    "
-    arranged_problems = arranged_problems + thirdLine + "\n"
+    if answer:
+        for i in range(len(first_operand)):
+            if operator[i] == "+":
+                ans = str(int(first_operand[i]) + int(second_operand[i]))
+            else:
+                ans = str(int(first_operand[i]) - int(second_operand[i]))
 
-    if(boolE):
-        fourthLine = "" #result
-        for result in resultsArray:
-            fourthLine = fourthLine + str(result)
-            fourthLine = fourthLine + "    "
-        arranged_problems = arranged_problems + fourthLine + "\n"
-
+            if len(ans) > max(len(first_operand[i]), len(second_operand[i])):
+                fourth_line.append(" " + ans)
+            else:
+                fourth_line.append(" " * (max(len(first_operand[i]), len(second_operand[i])) - len(ans) + 2) + ans)
+        arranged_problems = "    ".join(first_line) + "\n" + "    ".join(second_line) + "\n" + "    ".join(third_line) + "\n" + "    ".join(fourth_line)
+    else:
+        arranged_problems = "    ".join(first_line) + "\n" + "    ".join(second_line) + "\n" + "    ".join(third_line)
     return arranged_problems
 
-result = arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"], True)
-print(result)
+test_case = ['3 + 855', '988 + 40']
+
+result_with_answers = arithmetic_arranger(test_case, True)
+result_without_answers = arithmetic_arranger(test_case)
+
+print("Test Case with Answers:")
+print(result_with_answers)
+
+print("\nTest Case without Answers:")
+print(result_without_answers)

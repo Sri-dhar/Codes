@@ -1,16 +1,6 @@
-firstLine = ""
-    for problem in problems:
-        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
-            firstLine = firstLine + "  " + problem.split(" ")[0]
-        else:
-            firstLine = firstLine + "  " + problem.split(" ")[2]
+hour_begin, minute_begin = [int(x) for x in start_time.split(":")]
+    if am_or_pm == "PM":
+        hour_begin += 12
+    start_seconds = hour_begin * 3600 + minute_begin * 60
 
-    arranged_problems = firstLine + "\n"    
-
-    secondLine = ""
-    for problem in problems:
-        if problem.split(" ")[0].__len__() > problem.split(" ")[2].__len__():
-            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[0]
-        else:
-            secondLine = secondLine + problem.split(" ")[1] + " " + problem.split(" ")[2]
-    arranged_problems = arranged_problems + secondLine + "\n"
+    delta_hour, delta_minute = [int(x) for x in duration.split(":")]

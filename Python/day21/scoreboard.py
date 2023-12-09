@@ -22,7 +22,7 @@ class scoreBoard(Turtle):
         self.location = (0, 260)
 
     def update_high_score(self):
-        with open("high_score.txt", "w") as file:
+        with open("day21/high_score.txt", "w") as file:
             file.write(str(self.high_score))
         self.update_scoreboard()
     

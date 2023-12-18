@@ -1,0 +1,1 @@
+data[data.day == 'Monday']

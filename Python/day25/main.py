@@ -17,6 +17,21 @@
 import pandas as pd
 
 data = pd.read_csv("weather_data.csv")
+print(data['day'])
+print('----------------------------------------------------')
 print(data)
 
+print(type(data))
+print('----------------------------------------------------')
+print(type(data['temp']))
 
+data_dict = data.to_dict()
+# print(data_dict)
+
+temp_list = data['temp'].to_list()
+print(temp_list)
+print()
+print("The mean is:")
+print(data['temp'].mean())
+
+print (data[data.day == 'Monday'])

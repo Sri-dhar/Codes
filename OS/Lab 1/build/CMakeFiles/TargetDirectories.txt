@@ -1,0 +1,10 @@
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/pipe.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/q1.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/q2.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/q3.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/q4.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/test.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/test2.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/test3.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/edit_cache.dir
+/home/ketone/Codes/OS/Lab 1/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/q3.dir/q3.c.o -o q3 

@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/q4.dir/q4.c.o -o q4 

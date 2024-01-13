@@ -20,7 +20,4 @@ print(a.__len__())  # 12
 print(len(a))  # 12
 
 
-if(print(a)):
-    print("aerwgsawesrhyet")
-
 

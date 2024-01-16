@@ -10,7 +10,6 @@ int main() {
             count++;
         }
     }
-
     fprintf(stderr, "The count of Non-Alphabetic Nos. is : %d\n", count);
     return 0;
 }

@@ -11,7 +11,7 @@ int main() {
             putchar(tolower(c));
         } else {
             putchar(c);
-        }
+        }    
     }
 
     return 0;

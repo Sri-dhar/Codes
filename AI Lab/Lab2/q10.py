@@ -46,29 +46,32 @@ print(num)
 print()
 
 print("Random matrix of 5X4: ")
-ROW = 5
-COL = 4
+# ROW = 5
+# COL = 4
 
-matrix = [[0 for i in range(COL)] for j in range(ROW)]
-for i in range(ROW):
-    for j in range(COL):
-        matrix[i][j] = random.randint(1, 10)
+# matrix = [[0 for i in range(COL)] for j in range(ROW)]
+# for i in range(ROW):
+#     for j in range(COL):
+#         matrix[i][j] = random.randint(1, 10)
+matrix = np.random.randint(1, 10, (5, 4))
+# ROW = 5
+# COL = 4
 
-print("The matrix created is : ")
-for i in range(ROW):
-    for j in range(COL):
-        print(matrix[i][j], end=" ")
-    print()
+# print("The matrix created is : ")
+# for i in range(ROW):
+#     for j in range(COL):
+#         print(matrix[i][j], end=" ")
+#     print()
 
-f = open("AI Lab/Lab2/matrix.txt", "w")
-for i in range(ROW):
-    for j in range(COL):
-        f.write(str(matrix[i][j]) + " ")
-    f.write("\n")
-f.close()
+#using numpy print the above matrix
+print(matrix)
+f = open("matrix.txt", "w")
+np.savetxt("matrix.txt", matrix)
 
 print()
 print("Matrix loaded from file: ")
-arr = np.loadtxt("AI Lab/Lab2/matrix.txt")
-print(arr)
+
+matrix_loaded = np.loadtxt("matrix.txt")
+print(matrix_loaded)
+
 

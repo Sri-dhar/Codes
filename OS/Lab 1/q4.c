@@ -12,7 +12,7 @@ int main() {
     int newfd = dup(fd);
     printf("dup: Duplicated file descriptor: %d\n", newfd);
 
-    int newfd2 = dup2(fd, 10);
+    int newfd2 = dup2(fd, 15);
     printf("dup2: Duplicated file descriptor: %d\n", newfd2);
 
     int pipefd[2];

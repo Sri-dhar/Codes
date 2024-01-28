@@ -62,12 +62,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    // In Unix-like systems, file descriptors 0, 1, and 2 are reserved 
-    // for standard input, standard output, and standard error, respectively.
-    // By closing file descriptor 0 and duplicating fd_in to file descriptor
-    // 0 using dup(fd_in), the program redirects standard input from the 
-    // keyboard to the file specified by file1.
-
     close(0);
     if (dup(fd_in) == -1) {
         perror("Error duplicating file descriptor for stdin");
@@ -109,9 +103,7 @@ int main(int argc, char *argv[]) {
         close(fd_in);
         close(fd_out);
         count();
-    } 
-    else 
-    {
+    } else {
         pid_convert = fork();
         if (pid_convert == -1) {
             perror("Error forking convert");

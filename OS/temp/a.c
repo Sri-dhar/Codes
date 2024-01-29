@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+
 
 int main() {
     pid_t childPID = fork();
@@ -14,8 +16,10 @@ int main() {
         printf("Child process: PID = %d  Parent ID: %d\n", getpid(),getppid());
     } else {
         // Code executed by the parent process
-        printf("Parent process: PID = %d, Child PID = %d\n", getpid(), childPID);
+        printf("Parent process: PID = %d, Child PID = %d\n Parent PID: %d\n", getpid(), childPID, getppid());
     }
+   // while(1) 
+    printf("%d || %d\n",childPID,getpid());
 
     return 0;
 }

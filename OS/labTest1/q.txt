@@ -1,0 +1,24 @@
+Instruction:
+1. Plagiarism will be checked after the exam. If found, all involved students will get zero.
+2. After completion, you need to submit your code via Google Form. Use following link
+https://docs.google.com/forms/d/e/1FAIpQLSdrcPHZAghjGGo2lrNPUTLy56hF3CQ1zPg3YHS7wYJXy8-
+Bvw/viewform?usp=sf_link
+3. The file name of your program should be your roll with .c extension.
+4. Mark will be deducted for every minute delay in submission.
+5. Submission time 10:45 AM, 29 th Jan.
+
+Question
+
+Write a program in which a parent process creates two child processes. The two child processes
+communicate using one pipe and one child process and the parent process communicate using another
+pipe.
+One process takes input characters from user using ‘while (1)’ loop or ‘do while(1)’ and write it to a pipe.
+As it is while(1), the loop will never end and every time an input number is given it will be written to the
+pipe.
+Another child process will take characters from the pipe and increment these by one and write to the
+second pipe. This will again be done in a ‘while (1)’ loop or ‘do while (1)’ loop.
+The parent process will take characters from the second pipe and decrement it by one and print the
+characters received from the second pipe. If an ‘end of file’ is received, the parent process terminates
+both child processes and displays “Child processes terminated” and then exits.
+After one increment and one decrement, the same characters are obtained. So input characters and the
+same as output characters.

@@ -7,7 +7,7 @@ df = pd.DataFrame(img.reshape(-1, 3), columns=['R', 'G', 'B'])
 
 df.to_csv('image_matrix.csv')   
 
-print(df.head())
+print(df)
 
 print("\n\nImporting Excel data from the .csv file excluding the last row and last column")
 

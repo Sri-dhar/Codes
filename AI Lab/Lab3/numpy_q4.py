@@ -1,11 +1,10 @@
 import numpy as np
 
-A = np.random.uniform(1, 10, (3, 3))  
-b = np.random.uniform(1, 10, 3) 
-x = np.linalg.solve(A, b)
+A = np.random.randint(1, 10, (3, 3))  
+B = np.random.randint(1, 10, 3) 
+x = np.linalg.solve(A, B)
 
-#print the equation
 print("The equation is:")
-print(A, "x = ", b)
+print(A, "x = ", B)
 
 print("The solution is:", x)

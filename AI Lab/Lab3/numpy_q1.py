@@ -17,12 +17,12 @@ for i in range(106):
 
 end_time1 = time.time()
 
-print("Time taken by loop-based matrix multiplication: ", end_time1 - start_time1)
+print(f"Time taken by loop-based matrix multiplication: {end_time1 - start_time1:.4f}")
 
 start_time2 = time.time()
 result_vector = np.dot(P, Q_transpose)
 end_time2 = time.time()
 
-print("Time taken by vectorized matrix multiplication: ", end_time2 - start_time2)
+print(f"Time taken by vectorized matrix multiplication: {end_time2 - start_time2:.4f}")
 
 print(f"The speedup is : {((end_time1 - start_time1) / (end_time2 - start_time2)):.2f} times faster.")

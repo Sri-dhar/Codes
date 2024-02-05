@@ -123,10 +123,8 @@ int main(int argc, const char *argv[])
         break;
     }
 
-    // Add cases for other scheduling algorithms if needed
 
     case 4:
-        // Exit
         return 0;
 
     default:

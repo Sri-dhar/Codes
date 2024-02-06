@@ -4,37 +4,40 @@ using namespace std;
 #define IOS ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define MOD 1e9+7
 #define ll long long
+#define initPQ(type, name) priority_queue<type> name
+#define initQ(type, name) queue<type> name
+#define popQ(name) if (!name.empty()) name.pop()
+#define pushQ(name, value) name.push(value)
+#define topQ(name) (!name.empty() ? name.top() : -1)
+#define emptyQ(name) name.empty()
+#define sizeQ(name) name.size()
+#define clearQ(name) while (!name.empty()) name.pop()
+#define initV(type, name, size) vector<type> name(size)
 
 void solve()
 {
-    //codeforces 1826A
-    int n;
+    int n = 0;
     cin >> n;
-    vector<int> arr(n);
-    for(int i=0; i<n; i++)
-        cin>>arr[i];
-
-    int ans = -1;
-    for(int j = 0; j<=n ;j++)
+    cout<<n<<" ";
+    while(n!=1)
     {
-        int count = 0;
-        for(int i = 0; i<n; i++)
+        if(n%2)
         {
-            if(arr[i]>j) count++;
+            n = n*3+1;
+            cout<<n<<" ";
         }
-        if(count == j) {
-            ans = j;
-            break;
+        else
+        {
+            n /=2;
+            cout<<n<<" ";
         }
     }
-    cout<<ans<<endl;
-
 }
 
 int main() {
     IOS
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
         solve();

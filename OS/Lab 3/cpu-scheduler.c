@@ -74,6 +74,20 @@ void fcfsScheduling(Process processtable[MAX_PROCESS], int numProcesses)
     printTurnaroundWaitTimes(processtable, numProcesses);
 }
 
+void roundRobinScheduling(Process processtable[MAX_PROCESS],int numProcesses)
+{
+    int time = 0;
+    int quantum = 2;
+    int remainingBurst[numProcesses];
+    int remainingProcesses = numProcesses;
+
+    printf("-----------------------------------------------\n");
+    printf("             Round Robin Scheduling            \n");
+    printf("-----------------------------------------------\n");
+
+    
+}
+
 int main(int argc, const char *argv[])
 {
     if (argc < 2)
@@ -123,6 +137,12 @@ int main(int argc, const char *argv[])
         break;
     }
 
+    case 2:
+    {
+        roundRobinScheduling(processtable, MAX_PROCESS);
+        break;
+    }
+
 
     case 4:
         return 0;
@@ -134,3 +154,5 @@ int main(int argc, const char *argv[])
 
     return 0;
 }
+
+//gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process.txt

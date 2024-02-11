@@ -1,4 +1,7 @@
-2 5 0 
-6 4 3 
-1 7 8 
-Number of states checked: 7690
+4 8 2 
+1 7 6 
+0 5 3 
+Number of states checked using BFS: 123371
+Number of states checked using DFS: 214852
+Number of states checked using Iterative Deepening: 306333
+Number of states checked using Uniform Cost Search: 429704

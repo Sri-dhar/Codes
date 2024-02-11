@@ -5,8 +5,30 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <ctype.h>
+#include <limits.h>
+#include <stdbool.h>
 
 #define MAX_PROCESS 10
+int numOfProcess = 0;
+
+void getNoOfProcesses(const char *filename)
+{
+    FILE *file = fopen(filename, "r");
+    if (file == NULL)
+    {
+        printf("Error: Could not open file\n");
+        exit(1);
+    }
+
+    while (!feof(file))
+    {
+        char *name = (char *)malloc(10);
+        int arrival, cpuburst;
+        fscanf(file, "%s %d %d", name, &arrival, &cpuburst);
+        numOfProcess++;
+    }
+    fclose(file);
+}
 
 typedef struct
 {
@@ -34,23 +56,28 @@ void printTurnaroundWaitTimes(Process processtable[MAX_PROCESS], int numProcesse
     int totalTurnaround = 0;
     int totalWait = 0;
 
-    printf("\nTurnaround times:");
-    for (int i = 0; i < numProcesses; i++)
-    {
-        printf(" %s[%d]", processtable[i].name, processtable[i].turnaround);
-        totalTurnaround += processtable[i].turnaround;
-    }
+    printf("\n%-10s%-15s%-15s%-15s%-15s\n", "Process", "Arrival", "CPU Burst", "Turnaround", "Wait");
+    printf("-------------------------------------------------\n");
 
-    printf("\nWait times:");
     for (int i = 0; i < numProcesses; i++)
     {
-        printf(" %s[%d]", processtable[i].name, processtable[i].wait);
+        printf("%-10s%-15d%-15d%-15d%-15d\n",
+               processtable[i].name,
+               processtable[i].arrival,
+               processtable[i].cpuburst,
+               processtable[i].turnaround,
+               processtable[i].wait);
+
+        totalTurnaround += processtable[i].turnaround;
         totalWait += processtable[i].wait;
     }
 
-    printf("\nAverage turnaround time: %.2f", (float)totalTurnaround / numProcesses);
-    printf("\nAverage wait time: %.2f\n", (float)totalWait / numProcesses);
+    printf("-------------------------------------------------\n");
+
+    printf("Average Turnaround Time: %.2f\n", (float)totalTurnaround / numOfProcess);
+    printf("Average Wait Time: %.2f\n", (float)totalWait / numOfProcess);
 }
+
 
 void fcfsScheduling(Process processtable[MAX_PROCESS], int numProcesses)
 {
@@ -74,20 +101,117 @@ void fcfsScheduling(Process processtable[MAX_PROCESS], int numProcesses)
     printTurnaroundWaitTimes(processtable, numProcesses);
 }
 
-void roundRobinScheduling(Process processtable[MAX_PROCESS],int numProcesses)
+void roundRobinScheduling(Process processtable[MAX_PROCESS], int numProcesses, int quantum)
 {
     int time = 0;
-    int quantum = 2;
-    int remainingBurst[numProcesses];
-    int remainingProcesses = numProcesses;
+    int remainingBurst[MAX_PROCESS];
 
     printf("-----------------------------------------------\n");
     printf("             Round Robin Scheduling            \n");
     printf("-----------------------------------------------\n");
 
-    
-    
+    // Initialize remainingBurst array and other variables
+    for (int i = 0; i < numProcesses; i++)
+    {
+        remainingBurst[i] = processtable[i].cpuburst;
+        processtable[i].wait = 0;
+        processtable[i].turnaround = 0;
+    }
+
+    while (1)
+    {
+        bool done = true;
+
+        for (int i = 0; i < numProcesses; i++)
+        {
+            if (remainingBurst[i] > 0)
+            {
+                done = false;
+
+                if (remainingBurst[i] > quantum)
+                {
+                    time += quantum;
+                    remainingBurst[i] -= quantum;
+                }
+                else
+                {
+                    time += remainingBurst[i];
+                    processtable[i].turnaround = time - processtable[i].arrival;
+                    processtable[i].wait = processtable[i].turnaround - processtable[i].cpuburst;
+                    remainingBurst[i] = 0;
+                }
+            }
+        }
+
+        if (done)
+            break;
+    }
+
+    printTurnaroundWaitTimes(processtable, numProcesses);
 }
+
+
+void srbfScheduling(Process processtable[MAX_PROCESS], int numProcesses)
+{
+    int time = 0;
+    int remainingBurst[MAX_PROCESS];
+
+    printf("-----------------------------------------------\n");
+    printf("     Shortest Remaining Burst First Scheduling  \n");
+    printf("-----------------------------------------------\n");
+
+    for (int i = 0; i < numProcesses; i++)
+    {
+        remainingBurst[i] = processtable[i].cpuburst;
+    }
+
+    while (1)
+    {
+        int smallest = INT_MAX;
+        int shortest = -1;
+
+        for (int i = 0; i < numProcesses; i++)
+        {
+            if (processtable[i].arrival <= time && remainingBurst[i] < smallest && remainingBurst[i] > 0)
+            {
+                smallest = remainingBurst[i];
+                shortest = i;
+            }
+        }
+
+        if (shortest == -1)
+        {
+            time++;
+            continue;
+        }
+
+        remainingBurst[shortest]--;
+        if (remainingBurst[shortest] == 0)
+        {
+            processtable[shortest].turnaround = time + 1 - processtable[shortest].arrival;
+            processtable[shortest].wait = processtable[shortest].turnaround - processtable[shortest].cpuburst;
+        }
+
+        time++;
+
+        int done = 1;
+        for (int i = 0; i < numProcesses; i++)
+        {
+            if (remainingBurst[i] > 0)
+            {
+                done = 0;
+                break;
+            }
+        }
+
+        if (done)
+            break;
+    }
+
+    printTurnaroundWaitTimes(processtable, numProcesses);
+}
+
+
 
 int main(int argc, const char *argv[])
 {
@@ -96,6 +220,9 @@ int main(int argc, const char *argv[])
         printf("Usage: cpu-scheduler <inputfile>\n");
         return 1;
     }
+
+    getNoOfProcesses(argv[1]);
+
 
     FILE *file = fopen(argv[1], "r");
     if (file == NULL)
@@ -117,43 +244,51 @@ int main(int argc, const char *argv[])
     }
 
     fclose(file);
-
-    int choice;
-    printf("--------------------------------------------------\n");
-    printf("           CPU SCHEDULING SIMULATION              \n");
-    printf("--------------------------------------------------\n");
-    printf("Select the scheduling algorithm [1,2,3 or 4]:\n");
-    printf("1. First-Come First-Served (FCFS)\n");
-    printf("2. Round-Robin\n");
-    printf("3. SRBF\n");
-    printf("4. Exit\n");
-
-    scanf("%d", &choice);
-
-    switch (choice)
+    do
     {
-    case 1:
-    {
-        fcfsScheduling(processtable, MAX_PROCESS);
-        break;
-    }
+        int choice;
+        printf("--------------------------------------------------\n");
+        printf("           CPU SCHEDULING SIMULATION              \n");
+        printf("--------------------------------------------------\n");
+        printf("Select the scheduling algorithm [1,2,3 or 4]:\n");
+        printf("1. First-Come First-Served (FCFS)\n");
+        printf("2. Round-Robin\n");
+        printf("3. SRBF\n");
+        printf("4. Exit\n");
 
-    case 2:
-    {
-        roundRobinScheduling(processtable, MAX_PROCESS);
-        break;
-    }
+        scanf("%d", &choice);
 
+        switch (choice)
+        {
+        case 1:
+        {
+            fcfsScheduling(processtable, MAX_PROCESS);
+            break;
+        }
 
-    case 4:
-        return 0;
+        case 2:
+        {
+            int quantum;
+            printf("Enter the time quantum: ");
+            scanf("%d", &quantum);
+            roundRobinScheduling(processtable, MAX_PROCESS, quantum);
+            break;
+        }
+        case 3:
+        {
+            srbfScheduling(processtable, MAX_PROCESS);
+            break;
+        }
 
-    default:
-        printf("Invalid choice. Exiting...\n");
-        return 1;
-    }
+        case 4:
+            return 0;
 
+        default:
+            printf("Invalid choice. Exiting...\n");
+            return 1;
+        }
+    } while (1);
     return 0;
 }
 
-//gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process.txt
+// gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process.txt

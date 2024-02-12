@@ -19,7 +19,7 @@ void PrintProcTable();
 void FCFS();
 void RoundRobin(int quantum);
 void ShortestRemainingBurstFirst();
-void DataPrint();
+void PrintStats();
 void PrintRoundRobinHeader();
 
 Process proctable[MAX_PROC];
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
                 printf("First Come First Served Scheduling\n");
                 printf("-------------------------------------------------\n");
                 FCFS();
-                DataPrint();
+                PrintStats();
                 break;
             case 2:
                 printf("Enter the time quantum: ");
@@ -64,14 +64,14 @@ int main(int argc, char *argv[]) {
                 printf("Round Robin Scheduling\n");
                 printf("-------------------------------------------------\n");
                 RoundRobin(quantum);
-                DataPrint();
+                PrintStats();
                 break;
             case 3:
                 printf("-------------------------------------------------\n");
                 printf("Shortest Remaining Burst First Scheduling\n");
                 printf("-------------------------------------------------\n");
                 ShortestRemainingBurstFirst();
-                DataPrint();
+                PrintStats();
                 break;
             case 4:
                 printf("Exiting...\n");
@@ -220,7 +220,7 @@ void ShortestRemainingBurstFirst() {
     }
 }
 
-void DataPrint() {
+void PrintStats() {
     printf("Process   Arrival        CPU Burst      Turnaround     Wait\n");
     printf("-------------------------------------------------\n");
     for (int i = 0; i < num_procs; i++) {

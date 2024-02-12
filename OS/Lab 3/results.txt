@@ -1,0 +1,484 @@
+The inferences taken were:
+    The scheduling algorithm choice significantly impacts the 
+    turnaround and wait times.
+    The time quantum in Round Robin affects how processes are scheduled.
+    Smaller time quantum values may result in more context switches and potentially higher overhead.
+    Negative wait times in the Round Robin simulation suggest 
+    an issue in the implementation.
+
+
+
+
+
+
+
+
+
+    ~/Codes/OS/Lab 3    main !5 ?4  gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process.txt                                      INT ✘  2m 57s  
+The processes are : 
+P0 0 3
+P1 1 6
+P2 5 4
+P3 7 3
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+1
+-------------------------------------------------
+         First Come First Served Scheduling      
+-------------------------------------------------
+[0-3] P0 running
+[3-9] P1 running
+[9-13] P2 running
+[13-16] P3 running
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              3              3              0              
+P1        1              6              8              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        5              4              8              4              
+(null)    0              0              0              0              
+P3        7              3              9              6              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 7.00
+Average Wait Time: 3.00
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+2
+Enter the time quantum: 2
+-----------------------------------------------
+             Round Robin Scheduling            
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              3              9              6              
+P1        1              6              15             9              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        5              4              8              4              
+(null)    0              0              0              0              
+P3        7              3              7              4              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 9.75
+Average Wait Time: 5.75
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+3
+-----------------------------------------------
+     Shortest Remaining Burst First Scheduling  
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              3              3              0              
+P1        1              6              8              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        5              4              11             7              
+(null)    0              0              0              0              
+P3        7              3              5              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 6.75
+Average Wait Time: 2.75
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+4
+    ~/Codes/OS/Lab 3    main !5 ?4  gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process2.txt                                             ✔  8s  
+The processes are : 
+P0 0 5
+P1 1 3
+P2 4 6
+P3 7 4
+ kp�� 7 4
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+1
+-------------------------------------------------
+         First Come First Served Scheduling      
+-------------------------------------------------
+[0-5] P0 running
+[5-8] P1 running
+[8-14] P2 running
+[14-18]  kp�� running
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              5              5              0              
+P1        1              3              7              4              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        4              6              10             4              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ kp��    7              4              11             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 6.60
+Average Wait Time: 3.00
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+2
+Enter the time quantum: 3
+-----------------------------------------------
+             Round Robin Scheduling            
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              5              14             9              
+P1        1              3              5              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        4              6              13             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ kp��    7              4              11             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 8.60
+Average Wait Time: 5.00
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+3
+-----------------------------------------------
+     Shortest Remaining Burst First Scheduling  
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              5              8              3              
+P1        1              3              3              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        4              6              14             8              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ kp��    7              4              5              1              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 6.00
+Average Wait Time: 2.40
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+4
+    ~/Codes/OS/Lab 3    main  gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process3.txt                                                   ✔  7s  
+The processes are : 
+P0 0 4
+P1 2 5
+P2 5 2
+P3 7 6
+ [5�U 7 6
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+1
+-------------------------------------------------
+         First Come First Served Scheduling      
+-------------------------------------------------
+[0-4] P0 running
+[4-9] P1 running
+[9-11] P2 running
+[11-17]  [5�U running
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              4              4              0              
+(null)    0              0              0              0              
+P1        2              5              7              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        5              2              6              4              
+(null)    0              0              0              0              
+ [5�U    7              6              10             4              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 5.40
+Average Wait Time: 2.00
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+2
+Enter the time quantum: 3
+-----------------------------------------------
+             Round Robin Scheduling            
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              4              12             8              
+(null)    0              0              0              0              
+P1        2              5              12             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+P2        5              2              3              1              
+(null)    0              0              0              0              
+ [5�U    7              6              10             4              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 7.40
+Average Wait Time: 4.00
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+4
+    ~/Codes/OS/Lab 3    main  gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process4.txt                                                   ✔  5s  
+The processes are : 
+P0 0 2
+P1 1 4
+P2 3 3
+P3 6 5
+ K�� 6 5
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+1
+-------------------------------------------------
+         First Come First Served Scheduling      
+-------------------------------------------------
+[0-2] P0 running
+[2-6] P1 running
+[6-9] P2 running
+[9-14]  K�� running
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              2              2              0              
+P1        1              4              5              1              
+(null)    0              0              0              0              
+P2        3              3              6              3              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ K��    6              5              8              3              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 4.20
+Average Wait Time: 1.40
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+2
+Enter the time quantum: 3
+-----------------------------------------------
+             Round Robin Scheduling            
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              2              2              0              
+P1        1              4              11             7              
+(null)    0              0              0              0              
+P2        3              3              5              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ K��    6              5              8              3              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 5.20
+Average Wait Time: 2.40
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+4
+    ~/Codes/OS/Lab 3    main  gcc cpu-scheduler.c -o cpu-scheduler && ./cpu-scheduler process5.txt                                                   ✔  7s  
+The processes are : 
+P0 0 6
+P1 2 3
+P2 4 5
+P3 7 2
+ ���@ 7 2
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+1   
+-------------------------------------------------
+         First Come First Served Scheduling      
+-------------------------------------------------
+[0-6] P0 running
+[6-9] P1 running
+[9-14] P2 running
+[14-16]  ���@ running
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              6              6              0              
+(null)    0              0              0              0              
+P1        2              3              7              4              
+(null)    0              0              0              0              
+P2        4              5              10             5              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ ���@    7              2              9              7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 6.40
+Average Wait Time: 3.20
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+2
+Enter the time quantum: 2
+-----------------------------------------------
+             Round Robin Scheduling            
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              6              15             9              
+(null)    0              0              0              0              
+P1        2              3              9              6              
+(null)    0              0              0              0              
+P2        4              5              12             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ ���@    7              2              1              -1             
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 7.40
+Average Wait Time: 4.20
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+3
+-----------------------------------------------
+     Shortest Remaining Burst First Scheduling  
+-----------------------------------------------
+
+Process   Arrival        CPU Burst      Turnaround     Wait           
+-------------------------------------------------
+P0        0              6              9              3              
+(null)    0              0              0              0              
+P1        2              3              3              0              
+(null)    0              0              0              0              
+P2        4              5              12             7              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+ ���@    7              2              4              2              
+(null)    0              0              0              0              
+(null)    0              0              0              0              
+-------------------------------------------------
+Average Turnaround Time: 5.60
+Average Wait Time: 2.40
+--------------------------------------------------
+           CPU SCHEDULING SIMULATION              
+--------------------------------------------------
+Select the scheduling algorithm [1,2,3 or 4]:
+1. First-Come First-Served (FCFS)
+2. Round-Robin
+3. SRBF
+4. Exit
+4

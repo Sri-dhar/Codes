@@ -111,6 +111,15 @@ def heuristic(matrix, goal_matrix):
                 distance += abs(x - i) + abs(y - j)
     return distance if distance is not None else float('inf')
 
+def heuristic2(matrix, goal_matrix):
+    #no of misplaced tiles
+    distance = 0
+    for i in range(3):
+        for j in range(3):
+            if matrix[i][j] != goal_matrix[i][j]:
+                distance += 1
+    return distance if distance is not None else float('inf')    
+
 def greedy_bfs(matrix):
     global no_of_states_checked
     queue = []

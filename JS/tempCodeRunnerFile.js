@@ -13,4 +13,6 @@ const num = parseInt(prompt('Enter the number of terms: '));
 for(let i = 0; i < num; i++)
 {
     console.log(fibo(i));
+    console.log(fibo(i-2));
+
 }

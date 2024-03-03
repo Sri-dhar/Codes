@@ -1,0 +1,1721 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 12">
+<meta name=Originator content="Microsoft Word 12">
+<link rel=File-List href="POSIX%20semaphores_files/filelist.xml">
+<link rel=Edit-Time-Data href="POSIX%20semaphores_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>POSIX semaphores</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Rohit Tripathi</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Rohit Tripathi</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>8</o:TotalTime>
+  <o:Created>2015-08-25T04:09:00Z</o:Created>
+  <o:LastSaved>2016-08-29T09:35:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>738</o:Words>
+  <o:Characters>4208</o:Characters>
+  <o:Lines>35</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>4937</o:CharactersWithSpaces>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<link rel=themeData href="POSIX%20semaphores_files/themedata.thmx">
+<link rel=colorSchemeMapping
+href="POSIX%20semaphores_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-IN</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="--"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
+  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="267">
+  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
+  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Table Grid"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1107305727 0 0 415 0;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-520092929 1073806591 9 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+h1
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 1 Char";
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	font-weight:bold;}
+h2
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 2 Char";
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	font-weight:bold;}
+h4
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 4 Char";
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+code
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+pre
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-link:"HTML Preformatted Char";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;}
+tt
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 1";
+	mso-ansi-font-size:14.0pt;
+	mso-bidi-font-size:14.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#365F91;
+	mso-themecolor:accent1;
+	mso-themeshade:191;
+	font-weight:bold;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 2";
+	mso-ansi-font-size:13.0pt;
+	mso-bidi-font-size:13.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;}
+span.Heading4Char
+	{mso-style-name:"Heading 4 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 4";
+	mso-ansi-font-size:12.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;
+	font-style:italic;}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"HTML Preformatted";
+	font-family:Consolas;
+	mso-ascii-font-family:Consolas;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:Consolas;
+	mso-bidi-font-family:Consolas;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:240456667;
+	mso-list-template-ids:-18453344;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1
+	{mso-list-id:644429367;
+	mso-list-template-ids:1282858298;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2
+	{mso-list-id:978654427;
+	mso-list-template-ids:-1716242122;}
+@list l2:level1
+	{mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l2:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3
+	{mso-list-id:1263874047;
+	mso-list-template-ids:245547118;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4
+	{mso-list-id:1420177745;
+	mso-list-template-ids:1362795726;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l4:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5
+	{mso-list-id:1932615511;
+	mso-list-template-ids:-1410985484;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l5:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l5:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-IN link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<h1><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>Synchronizing Threads with POSIX Semaphores<o:p></o:p></span></h1>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'>Why
+     semaphores? <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list 36.0pt'><span class=SpellE><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'>Posix</span></span><span lang=EN-US style='mso-fareast-font-family:
+     "Times New Roman";mso-ansi-language:EN-US'> semaphores are easy to use <o:p></o:p></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l2 level2 lfo1;tab-stops:list 72.0pt'><span lang=EN-US
+      style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+      href="#init"><span class=SpellE><tt><span style='font-size:10.0pt'>sem_init</span></tt></span></a>
+      <o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l2 level2 lfo1;tab-stops:list 72.0pt'><span lang=EN-US
+      style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+      href="#wait"><span class=SpellE><tt><span style='font-size:10.0pt'>sem_wait</span></tt></span></a>
+      <o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l2 level2 lfo1;tab-stops:list 72.0pt'><span lang=EN-US
+      style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+      href="#post"><span class=SpellE><tt><span style='font-size:10.0pt'>sem_post</span></tt></span></a>
+      <o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l2 level2 lfo1;tab-stops:list 72.0pt'><span lang=EN-US
+      style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+      href="#getvalue"><span class=SpellE><tt><span style='font-size:10.0pt'>sem_getvalue</span></tt></span></a>
+      <o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l2 level2 lfo1;tab-stops:list 72.0pt'><span lang=EN-US
+      style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+      href="#destroy"><span class=SpellE><tt><span style='font-size:10.0pt'>sem_destroy</span></tt></span></a>
+      <o:p></o:p></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+     href="#exercise_1">Exercises</a> &nbsp;&nbsp;<a href="#exercise_1">1</a>
+     &nbsp;&nbsp;<a href="#exercise_2">2</a> &nbsp;&nbsp;<a href="#exercise_3">3</a>
+     <o:p></o:p></span></li>
+</ol>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>Now it is time to take a look at some code that does
+something a little unexpected. The program <a
+href="file:///C:\Cygwin\home\Rohit%20Tripathi\oslab\Assignment%202\Part%20B_files\badcnt.c"><span
+class=SpellE><code><span style='font-size:10.0pt'>badcnt.c</span></code></span></a>
+creates two new threads, both of which increment a global variable called </span><span
+class=SpellE><code><span lang=EN-US style='font-size:10.0pt;color:blue;
+mso-ansi-language:EN-US'>cnt</span></code></span><span lang=EN-US
+style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'>
+exactly </span><code><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>NITER</span></code><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>, with </span><code><span lang=EN-US style='font-size:
+10.0pt;mso-ansi-language:EN-US'>NITER = 1,000,000</span></code><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>. But the program produces unexpected results. <o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal><a name="exercise_1"></a><span class=GramE><span
+style='mso-bookmark:exercise_1'><u><span lang=EN-US style='mso-fareast-font-family:
+"Times New Roman";color:brown;mso-ansi-language:EN-US'>Exercise 1</span></u></span><span
+style='mso-bookmark:exercise_1'><span lang=EN-US style='mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US'>.</span></span></span><span
+style='mso-bookmark:exercise_1'><span lang=EN-US style='mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US'> Create a directory called </span></span><span
+style='mso-bookmark:exercise_1'><span class=SpellE><tt><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>posixsem</span></tt></span></span><span
+style='mso-bookmark:exercise_1'><span lang=EN-US style='mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US'> in your class <span class=GramE>Unix</span>
+directory. Download in this directory the code </span></span><span lang=EN-US
+style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'><a
+href="file:///C:\Cygwin\home\Rohit%20Tripathi\oslab\Assignment%202\Part%20B_files\badcnt.c"><span
+class=SpellE><code><span style='font-size:10.0pt'>badcnt.c</span></code></span></a>
+and compile it using <span style='color:blue'><o:p></o:p></span></span></p>
+
+<pre><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>     </span><span
+class=SpellE><span class=GramE>gcc</span></span> <span class=SpellE>badcnt.c</span> -o <span
+class=SpellE>badcnt</span> -<span class=SpellE>lpthread</span> <o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Run the executable </span><span class=SpellE><tt><span lang=EN-US
+style='font-size:10.0pt;mso-ansi-language:EN-US'>badcnt</span></tt></span><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'> and observe the <span class=SpellE>ouput</span>.</span><span
+lang=EN-US style='mso-ansi-language:EN-US'><o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Quite unexpected! Since </span><span
+class=SpellE><code><b><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>cnt</span></b></code></span><span lang=EN-US style='mso-ansi-language:
+EN-US'> starts at 0, and both threads increment it </span><code><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>NITER</span></code><span
+lang=EN-US style='mso-ansi-language:EN-US'> times, we should see </span><span
+class=SpellE><tt><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>cnt</span></tt></span><span lang=EN-US style='mso-ansi-language:EN-US'>
+equal to </span><code><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>2*NITER</span></code><span lang=EN-US style='mso-ansi-language:EN-US'>
+at the end of the program. What happens? <o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Threads can greatly simplify writing
+elegant and efficient programs. However, there are problems when multiple
+threads share a common address space, like the variable </span><span
+class=SpellE><code><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>cnt</span></code></span><span lang=EN-US style='mso-ansi-language:EN-US'>
+in our earlier example. <o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>To understand what might happen, let
+us analyze this simple piece of code: <o:p></o:p></span></p>
+
+<pre><span lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span>THREAD 1<span style='mso-spacerun:yes'>                </span>THREAD 2<o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span>a = data;<span style='mso-spacerun:yes'>               </span>b = data;<o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=GramE>a</span>++;<span style='mso-spacerun:yes'>                    </span>b--;<o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=GramE>data</span> = a;<span style='mso-spacerun:yes'>               </span>data = b;<o:p></o:p></span></pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>Now if this code is executed
+serially (for instance, </span><tt><span lang=EN-US style='font-size:10.0pt;
+mso-ansi-language:EN-US'>THREAD 1</span></tt><span lang=EN-US style='mso-ansi-language:
+EN-US'> first and then </span><tt><span lang=EN-US style='font-size:10.0pt;
+mso-ansi-language:EN-US'>THREAD 2</span></tt><span lang=EN-US style='mso-ansi-language:
+EN-US'>), there are no problems. However threads execute in an arbitrary order,
+so consider the following situation: <o:p></o:p></span></p>
+
+<div align=center>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;border:outset black 1.0pt;mso-border-alt:
+ outset black .75pt;mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=230 style='width:172.5pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Thread
+  1</span></b><span style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.5pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Thread
+  2</span></b><span style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td width=60 style='width:45.0pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='mso-fareast-font-family:"Times New Roman"'>data</span></b><span
+  style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>a = data;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>a = a+1;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>b = data;&nbsp;&nbsp;//
+  0</span></tt><span style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>b = b + 1;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'><!--
+</TD-->
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>data = a;&nbsp;&nbsp;//
+  1</span></tt><span style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6;mso-yfti-lastrow:yes'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>data = b;&nbsp;&nbsp;//
+  1</span></tt><span style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>So data could end up +1, 0, -1, and
+there is <b>NO WAY</b> to know which value! It is completely non-deterministic!
+<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>The solution to this is to provide
+functions that will block a thread if another thread is accessing data that it
+is using. <o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=SpellE><span lang=EN-US style='mso-ansi-language:EN-US'>Pthreads</span></span><span
+lang=EN-US style='mso-ansi-language:EN-US'> may use semaphores to achieve this.
+<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name="posix_sem"></a><span class=SpellE><span style='mso-bookmark:posix_sem'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";color:brown;
+mso-ansi-language:EN-US'>Posix</span></span></span><span style='mso-bookmark:
+posix_sem'><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+color:brown;mso-ansi-language:EN-US'> semaphores<o:p></o:p></span></span></h2>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:posix_sem'><span lang=EN-US style='mso-ansi-language:EN-US'>All
+POSIX semaphore functions and types are prototyped or defined in </span></span><span
+style='mso-bookmark:posix_sem'><span class=SpellE><tt><span lang=EN-US
+style='font-size:10.0pt;color:blue;mso-ansi-language:EN-US'>semaphore.h</span></tt></span></span><span
+style='mso-bookmark:posix_sem'><span lang=EN-US style='mso-ansi-language:EN-US'>.
+To define a semaphore object, use <o:p></o:p></span></span></p>
+
+<pre><span style='mso-bookmark:posix_sem'><tt><span lang=EN-US
+style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE>sem_t</span> <span class=SpellE><i>sem_name</i></span>;</span><span
+style='color:blue'><o:p></o:p></span></tt></span></pre>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bookmark:posix_sem'><span lang=EN-US style='mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></span></div>
+
+<span style='mso-bookmark:posix_sem'></span>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=init></a><span lang=EN-US style='mso-ansi-language:EN-US'>To initialize a
+semaphore, use </span><span class=SpellE><tt><span lang=EN-US style='font-size:
+10.0pt;mso-ansi-language:EN-US'>sem_<span class=GramE>init</span></span></tt></span><span
+class=GramE><tt><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+EN-US'>(</span></tt></span><tt><span lang=EN-US style='font-size:10.0pt;
+mso-ansi-language:EN-US'>)</span></tt><span lang=EN-US style='mso-ansi-language:
+EN-US'>: <o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:brown;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> <span class=SpellE>sem_init</span>(<span
+class=SpellE>sem_t</span> *<span class=SpellE>sem</span>, <span class=SpellE>int</span> <span
+class=SpellE>pshared</span>, unsigned <span class=SpellE>int</span> value);</span><span
+style='color:brown'><o:p></o:p></span></tt></pre>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span class=SpellE><tt><span
+     lang=EN-US style='font-size:10.0pt;color:brown;mso-ansi-language:EN-US'>sem</span></tt></span><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'> points to a semaphore object to initialize </span><span
+     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><span class=SpellE><span
+     class=GramE><tt><span lang=EN-US style='font-size:10.0pt;color:brown;
+     mso-ansi-language:EN-US'>pshared</span></tt></span></span><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'> is a flag indicating whether or not the semaphore should be shared
+     with fork()<span class=SpellE>ed</span> processes. <span class=SpellE>LinuxThreads</span>
+     does not currently support shared semaphores <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><tt><span lang=EN-US
+     style='font-size:10.0pt;color:brown;mso-ansi-language:EN-US'>value</span></tt><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'> is an initial value to set the semaphore to <o:p></o:p></span></li>
+</ul>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Example of use: <o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE>sem_<span class=GramE>init</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>sem_name</span>, 0, 10);</span><o:p></o:p></tt></pre>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=wait></a><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>To wait on a semaphore, use </span><span class=SpellE><tt><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>sem_wait</span></tt></span><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>: <span style='color:brown'><o:p></o:p></span></span></p>
+
+<pre><tt><span lang=EN-US style='color:brown;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> <span class=SpellE>sem_wait</span>(<span
+class=SpellE>sem_t</span> *<span class=SpellE>sem</span>);</span><o:p></o:p></tt></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Example of use: </span><span style='mso-fareast-font-family:"Times New Roman";
+color:blue'><o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE>sem_<span class=GramE>wait</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>sem_name</span>); </span></tt><span lang=EN-US style='color:blue;
+mso-ansi-language:EN-US'><o:p></o:p></span></pre>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo3;tab-stops:list 36.0pt'><!--<tt>sem_wait</tt> is an implementation of the DOWN operation 
+discussed in class.--><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'>If the value of the semaphore is negative, the calling process
+     blocks; one of the blocked processes wakes up when another process calls </span><span
+     class=SpellE><tt><span lang=EN-US style='font-size:10.0pt;mso-ansi-language:
+     EN-US'>sem_post</span></tt></span><span lang=EN-US style='mso-fareast-font-family:
+     "Times New Roman";mso-ansi-language:EN-US'>.<o:p></o:p></span></li>
+</ul>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=post></a><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>To increment the value of a semaphore, use </span><span class=SpellE><tt><span
+lang=EN-US style='font-size:10.0pt;mso-ansi-language:EN-US'>sem_post</span></tt></span><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>: <span style='color:brown'><o:p></o:p></span></span></p>
+
+<pre><tt><span lang=EN-US style='color:brown;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> <span class=SpellE>sem_post</span>(<span
+class=SpellE>sem_t</span> *<span class=SpellE>sem</span>);</span><o:p></o:p></tt></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Example of use:<span style='color:blue'> </span></span><span
+style='mso-fareast-font-family:"Times New Roman";color:blue'><o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE>sem_<span class=GramE>post</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>sem_name</span>); </span></tt><span lang=EN-US style='color:blue;
+mso-ansi-language:EN-US'><o:p></o:p></span></pre>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo4;tab-stops:list 36.0pt'><!--  <tt>sem_post</tt> is an implementation of the UP operation 
+discussed in class. --><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'>It increments the value of the semaphore and wakes up a blocked
+     process waiting on the semaphore, if any. <o:p></o:p></span></li>
+</ul>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=getvalue></a><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>To find out the value of a semaphore, use <span style='color:brown'><o:p></o:p></span></span></p>
+
+<pre><tt><span lang=EN-US style='color:brown;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> <span class=SpellE>sem_getvalue</span>(<span
+class=SpellE>sem_t</span> *<span class=SpellE>sem</span>, <span class=SpellE>int</span> *<span
+class=SpellE>valp</span>);</span><o:p></o:p></tt></pre>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span lang=EN-US
+     style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:EN-US'>gets
+     the current value of <span class=SpellE>sem</span> and places it in the
+     location pointed to by </span><span class=SpellE><tt><span lang=EN-US
+     style='font-size:10.0pt;color:brown;mso-ansi-language:EN-US'>valp</span></tt></span><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'> </span><span style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></li>
+</ul>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Example of use: <o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> value; </span><span
+style='color:blue'><o:p></o:p></span></tt></pre><pre><tt><span lang=EN-US
+style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE>sem_<span class=GramE>getvalue</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>sem_name</span>, &amp;value); </span></tt><tt><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p></o:p></span></tt></pre><pre><tt><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>printf</span></span><span class=GramE>(</span>&quot;The value of the <span
+class=SpellE>semaphors</span> is %d\n&quot;, value);<o:p></o:p></span></tt></pre>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=destroy></a><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>To destroy a semaphore, use <span style='color:brown'><o:p></o:p></span></span></p>
+
+<pre><tt><span lang=EN-US style='color:brown;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span><span
+class=SpellE><span class=GramE>int</span></span> <span class=SpellE>sem_destroy</span>(<span
+class=SpellE>sem_t</span> *<span class=SpellE>sem</span>);</span><o:p></o:p></tt></pre>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo6;tab-stops:list 36.0pt'><span class=GramE><span
+     lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+     EN-US'>destroys</span></span><span lang=EN-US style='mso-fareast-font-family:
+     "Times New Roman";mso-ansi-language:EN-US'> the semaphore; no threads
+     should be waiting on the semaphore if its destruction is to succeed. </span><span
+     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></li>
+</ul>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Example of use: <o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>     </span><span
+class=SpellE>sem_<span class=GramE>destroy</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>sem_name</span>); </span><o:p></o:p></tt></pre>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>
+
+<hr size=4 width="100%" align=center>
+
+</span></div>
+
+<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name="posix_sem_example"><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+color:brown;mso-ansi-language:EN-US'>Using semaphores - a short example<o:p></o:p></span></a></h4>
+
+<span style='mso-bookmark:posix_sem_example'></span>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>Consider the problem we had before and now let us use semaphores: <o:p></o:p></span></p>
+
+<pre><span lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'> </span><o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span>Declare the semaphore global (outside of any <span
+class=SpellE>funcion</span>):<o:p></o:p></span></pre><pre><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>            </span><span
+class=SpellE><span class=GramE>sem_t</span></span> <span class=SpellE>mutex</span>;<o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>      </span>Initialize the semaphore in the main function:<o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>     </span><o:p></o:p></span></pre><pre><span
+lang=EN-US style='mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>         </span><span style='mso-spacerun:yes'>   </span><span
+class=SpellE>sem_<span class=GramE>init</span></span><span class=GramE>(</span>&amp;<span
+class=SpellE>mutex</span>, 0, 1);<o:p></o:p></span></pre><pre><span lang=EN-US
+style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></pre>
+
+<div align=center>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;border:outset black 1.0pt;mso-border-alt:
+ outset black .75pt;mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=226 style='width:169.5pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Thread
+  1</span></b><span style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td width=226 style='width:169.5pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><span style='mso-fareast-font-family:"Times New Roman"'>Thread
+  2</span></b><span style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td width=61 style='width:45.75pt;border:inset black 1.0pt;mso-border-alt:
+  inset black .75pt;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='mso-fareast-font-family:"Times New Roman"'>data</span></b><span
+  style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><tt><span style='font-size:10.0pt'>sem_wait</span></tt></span><tt><span
+  style='font-size:10.0pt'> (&amp;<span class=SpellE>mutex</span>);</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>---</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><tt><span style='font-size:10.0pt'>sem_wait</span></tt></span><tt><span
+  style='font-size:10.0pt'> (&amp;<span class=SpellE>mutex</span>);</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>a = data;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>a = a+1;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>0</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>data = a;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><tt><span style='font-size:10.0pt'>sem_post</span></tt></span><tt><span
+  style='font-size:10.0pt'> (&amp;<span class=SpellE>mutex</span>);</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>b = data;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>b = b + 1;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>1</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><tt><span style='font-size:10.0pt'>data = b;</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>2</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>/* blocked */</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><tt><span style='font-size:10.0pt'>sem_post</span></tt></span><tt><span
+  style='font-size:10.0pt'> (&amp;<span class=SpellE>mutex</span>);</span></tt><span
+  style='mso-fareast-font-family:"Times New Roman"'> <o:p></o:p></span></p>
+  </td>
+  <td style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><tt><span
+  style='font-size:10.0pt'>2</span></tt><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11;mso-yfti-lastrow:yes'>
+  <td colspan=3 style='border:inset black 1.0pt;mso-border-alt:inset black .75pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='mso-fareast-font-family:"Times New Roman"'>[<span class=GramE>data</span>
+  is fine. The data race is gone.]</span></b><span style='mso-fareast-font-family:
+  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name="exercise_2"><u><span lang=EN-US style='color:brown;mso-ansi-language:
+EN-US'>Exercise 2</span></u></a><span style='mso-bookmark:exercise_2'><span
+lang=EN-US style='mso-ansi-language:EN-US'>.</span></span><span lang=EN-US
+style='mso-ansi-language:EN-US'>Look at the files <span class=SpellE>goodcnt.c</span>
+and <span class=SpellE><span class=GramE>goodcntlock.c</span></span><span
+class=GramE> .</span> In <span class=SpellE>goodcnt.c</span>, POSIX semaphore
+is used for synchronization such that output is correct. In <span class=SpellE>goodcntlock.c</span>,
+<span class=SpellE>mutex</span> lock is used for synchronization. <o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+lang=EN-US style='mso-ansi-language:EN-US'>To compile a program that uses <span
+class=SpellE>pthreads</span> <i>and</i> <span class=SpellE>posix</span>
+semaphores, use <o:p></o:p></span></p>
+
+<pre><tt><span lang=EN-US style='color:blue;mso-ansi-language:EN-US'><span style='mso-spacerun:yes'>     </span><span
+class=SpellE><span class=GramE>gcc</span></span> -o filename <span
+class=SpellE>filename.c</span> -<span class=SpellE>lpthread</span></span><o:p></o:p></tt></pre>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name="exercise_3"></a><span lang=EN-US style='mso-fareast-font-family:"Times New Roman";
+mso-ansi-language:EN-US'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+</div>
+
+</body>
+
+</html>

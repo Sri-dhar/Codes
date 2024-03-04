@@ -19,21 +19,29 @@ using namespace std;
 
 void solve()
 {
-    ll n, m, a, b;
-    cin >> n >> m >> a >> b;
-    if (b < a * m)
+    int n;
+    cin>>n;
+    int a[n];
+    for (int i=0; i<n; i++)
     {
-        if (n % m * a < b) cout << n / m * b + n % m * a;
-        else cout << n / m * b + b;
+        cin>>a[i];
     }
-    else
-        cout << n * a;
+    sort(a,a+n);
+    int m;
+    cin>>m;
+    while(m--)
+    {
+        int x;
+        cin>>x;
+        cout<<upper_bound(a,a+n,x)-a;
+        cout<<endl;
+    }
 }
 
 int main()
 {
     IOS int t = 1;
-    // cin >> t;
+    //cin >> t;
     while (t--)
     {
         solve();

@@ -1,10 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-#define IOS                         \
-    ios_base::sync_with_stdio(0);   \
-    cin.tie(0);                     \
-    cout.tie(0);
+#define IOS ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define MOD 1000000007
 #define ll long long
 #define pb push_back
@@ -18,31 +15,41 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 #define int long long
 
-void solve(){
-	int n,k;
-	cin>>n>>k;
-    vector<int> s(k);
-	for(int i=0;i<k;++i) cin>>s[i];
-	vector<int>a;
+vector<int> rv(int n) { //readvector
+    vector<int> v(n);
+    for(int i = 0; i < n; i++)
+        cin >> v[i];
+    return v;
+}
 
-	for(int i=1;i<k;++i) a.push_back(s[i]-s[i-1]);
+vector<int> pf(vector<int>& arr) {
+    int n = arr.size();
+    vi prefix(n);
+    prefix[0] = arr[0];
+    for(int i = 1; i < n; i++) {
+        prefix[i] = prefix[i-1] + arr[i];
+    }
+    return prefix;
+}
 
-	for(int i=1;i<a.size();++i){
-		if(a[i]<a[i-1]){
-			cout<<"NO\n";
-			return;
-		}
-	}
+void solve() {
+    int n{} , q{};
+    cin >> n >> q;
+    vi stdiff = rv(n);
+    sort(all(stdiff));
+    vi stp = pf(stdiff);
+    vi ques = rv(q);
 
-	if(k==1)
+    for(int i = 0 ; i < ques.size(); i++)
     {
-		cout<<"YES\n";
-        return;
-	}
-
-	int t = n-k+1;
-	if(t*a[0]<s[0]) cout<<"NO\n";
-	else cout<<"YES\n";
+        int idx = upper_bound(all(stdiff), ques[i]) - stdiff.begin();
+        if(idx != 0) {
+            cout << stp[idx-1] << " ";
+        } else {
+            cout << 0 << " ";
+        }
+    }
+    cout << endl;
 }
 
 main() {

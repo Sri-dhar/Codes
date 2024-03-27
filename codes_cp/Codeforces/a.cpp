@@ -10,7 +10,7 @@ int advance(int a, int direction)
 {
     if(direction > 0)
     {
-        if(a<sizeeee) return a+1;
+        if(a < sizeeee) return a+1;
         else return 1;
     }
     else

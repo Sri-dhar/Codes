@@ -48,39 +48,27 @@ vi rv(int n)
 //     return prefix;
 // }
 
-int isodd(int n) { return n % 2; }
-
 void solve()
 {
-    int n, x, noo{}, noe{}, p{};
-    cin >> n >> x;
-    vi v(n);
-    for(auto &i : v)
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    int ans = 2;
+    int temp = -1;
+    for (int i = 1; i < n; i++)
     {
-        cin >> i;
-        if (i & 1)
-            noo++;
-        else
-            noe++;
+        if (arr[i] > arr[i - 1] and temp == 0) ans++;
+        else if (arr[i] < arr[i - 1] and temp == 1) ans++;
+        if (arr[i] != arr[i - 1]) temp = arr[i] > arr[i - 1];
     }
-
-    for (int i = 1; i <= x; i += 2)
-        if (noe >= (x - i) and noo >= i)
-        {
-            p = 1;
-            break;
-        }
-
-    if (p)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
+    if (temp == -1) cout << 1 << endl;
+    else cout << ans << endl;
 }
 
 signed main()
 {
-    IOS 
-    int t = 1;
+    IOS int t = 1;
     cin >> t;
     while (t--)
     {

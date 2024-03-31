@@ -52,8 +52,7 @@ void solve()
 {
     int n;
     cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) cin >> arr[i];
+    vi arr = rv(n);
     int ans = 2;
     int temp = -1;
     for (int i = 1; i < n; i++)

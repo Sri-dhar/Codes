@@ -14,8 +14,6 @@ opponent plays optimally.
 Beta Pruning.
 '''
 
-#using tic tac toe as the two player game
-
 import random
 import math
 

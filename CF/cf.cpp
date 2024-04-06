@@ -50,25 +50,13 @@ vi rv(int n)
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vi arr = rv(n);
-    int ans = 2;
-    int temp = -1;
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] > arr[i - 1] and temp == 0) ans++;
-        else if (arr[i] < arr[i - 1] and temp == 1) ans++;
-        if (arr[i] != arr[i - 1]) temp = arr[i] > arr[i - 1];
-    }
-    if (temp == -1) cout << 1 << endl;
-    else cout << ans << endl;
+    cout<<"NO"<<endl;
 }
 
 signed main()
 {
     IOS int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
         solve();

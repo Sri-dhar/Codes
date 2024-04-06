@@ -2,5 +2,8 @@
     "cSpell.words": [
         "inputfile",
         "srbf"
-    ]
+    ],
+    "files.associations": {
+        "unistd.h": "c"
+    }
 }

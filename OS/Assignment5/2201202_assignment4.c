@@ -94,7 +94,7 @@ int main() {
     int allocation[MAX_PROCESSES][MAX_RESOURCES];
     int n, m;
 
-    FILE *file = fopen("input2.txt", "r");
+    FILE *file = fopen("input.txt", "r");
     if (file == NULL) {
         printf("Failed to open the file.\n");
         return 1;

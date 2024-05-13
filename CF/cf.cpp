@@ -48,15 +48,39 @@ vi rv(int n)
 //     return prefix;
 // }
 
+int isodd(int n) { return n % 2; }
+
 void solve()
 {
-    cout<<"NO"<<endl;
+    int n, x, noo{}, noe{}, p{};
+    cin >> n >> x;
+    vi v(n);
+    for (auto &i : v)
+    {
+        cin >> i;
+        if (i & 1)
+            noo++;
+        else
+            noe++;
+    }
+
+    for (int i = 1; i <= x; i += 2)
+        if (noe >= (x - i) and noo >= i)
+        {
+            p = 1;
+            break;
+        }
+
+    if (p)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 }
 
 signed main()
 {
     IOS int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
     {
         solve();

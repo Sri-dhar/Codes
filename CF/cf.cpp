@@ -12,12 +12,19 @@ using namespace std;
 #define ff first
 #define ss second
 #define vi vector<int>
-#define vll vector<ll>
 #define pii pair<int, int>
-#define pll pair<ll, ll>
 #define all(x) x.begin(), x.end()
 #define vvi vector<vector<int>>
+#define vpi vector<pair<int, int>>
 #define int long long
+
+template <typename T>
+T read()
+{
+    T a;
+    cin >> a;
+    return a;
+}
 
 int read()
 {
@@ -55,20 +62,54 @@ vi rv(int n)
 //     return prefix;
 // }
 
-int isodd(int n) { return n % 2; }
+// int isodd(int n) { return n % 2; }
 
-void solve()
-{
-
-}
+// int min(int a, int b)
+// {
+//     if (a < b)
+//         return a;
+//     return b;
+// }
+void solve();
 
 signed main()
 {
     IOS int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
         solve();
     }
     return 0;
 }
+
+void solve()
+{
+    int n = read();
+    vi arr = rv(n);
+    vi a, b;
+    for(int i=1; i<=n; i++)
+    {
+        a.pb(i);
+        b.pb(i);
+    }
+    set<int> sa, sb;
+    sa.insert(all(a));
+    sb.insert(all(b));
+
+    for(int i=0; i<n; i++)
+    {
+        int goal = arr[i];
+        if(sa.find(goal) != sa.end())
+        {
+            a[i] = goal;
+            sa.erase(goal);
+        }
+        else
+        {
+            b[i] = goal;
+            sb.erase(goal);
+        }
+    }    
+}
+

@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-#define IOS                       \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0);
+#define IOS                                                                    \
+  ios_base::sync_with_stdio(0);                                                \
+  cin.tie(0);                                                                  \
+  cout.tie(0);
 #define MOD 1000000007
 #define ll long long
 #define pb push_back
@@ -18,27 +18,23 @@ using namespace std;
 #define vpi vector<pair<int, int>>
 #define int long long
 
-template <typename T>
-T read()
-{
-    T a;
-    cin >> a;
-    return a;
+template <typename T> T read() {
+  T a;
+  cin >> a;
+  return a;
 }
 
-int read()
-{
-    int a;
-    cin >> a;
-    return a;
+int read() {
+  int a;
+  cin >> a;
+  return a;
 }
 
-vi rv(int n)
-{ // readvector
-    vector<int> v(n);
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
-    return v;
+vi rv(int n) { // readvector
+  vector<int> v(n);
+  for (int i = 0; i < n; i++)
+    cin >> v[i];
+  return v;
 }
 
 // vvi rvm(int n, int m)
@@ -72,44 +68,13 @@ vi rv(int n)
 // }
 void solve();
 
-signed main()
-{
-    IOS int t = 1;
-    // cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-    return 0;
+signed main() {
+  IOS int t = 1;
+  cin >> t;
+  while (t--) {
+    solve();
+  }
+  return 0;
 }
 
-void solve()
-{
-    int n = read();
-    vi arr = rv(n);
-    vi a, b;
-    for(int i=1; i<=n; i++)
-    {
-        a.pb(i);
-        b.pb(i);
-    }
-    set<int> sa, sb;
-    sa.insert(all(a));
-    sb.insert(all(b));
-
-    for(int i=0; i<n; i++)
-    {
-        int goal = arr[i];
-        if(sa.find(goal) != sa.end())
-        {
-            a[i] = goal;
-            sa.erase(goal);
-        }
-        else
-        {
-            b[i] = goal;
-            sb.erase(goal);
-        }
-    }    
-}
-
+void solve() {}

@@ -17,6 +17,8 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 #define vvi vector<vector<int>>
 #define vpi vector<pair<int, int>>
+#define NO puts("NO")
+#define YES puts("YES")
 
 long long result = 0;
 

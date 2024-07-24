@@ -57,14 +57,14 @@ vector<T> rv(int n)
     return v;
 }
 
-// vvi rvm(int n, int m)
-// { // readvectormatrix
-//     vvi v(n, vector<int>(m));
-//     for (int i = 0; i < n; i++)
-//         for (int j = 0; j < m; j++)
-//             cin >> v[i][j];
-//     return v;
-// }
+vvi rvm(int n, int m)
+{ // readvectormatrix
+    vvi v(n, vector<int>(m));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> v[i][j];
+    return v;
+}
 
 // vector<int> pf(vector<int> &arr)
 // {
@@ -109,21 +109,74 @@ int lcm(int a, int b)
 // 	}
 // 	return ans;
 // }
+vi countOfOnePrefix;
+vi summationPrefix;
 
-void solve();
-
-signed main()
+bool check(vector<int> &c, int l, int r)
 {
-    IOS int t = 1;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-    return 0;
+    int noOfOne = countOfOnePrefix[r-1] ;//- ((l == 1) ? 0 : countOfOnePrefix[l - 1]);
+    if(l > 1) noOfOne -= countOfOnePrefix[l-1];
+    if (noOfOne == 0)
+        return true;
+    int sumLtoR = summationPrefix[r-1];// - (l ==1 ? 0 : summationPrefix[l-1]);
+    if(l > 1) sumLtoR -= summationPrefix[l-1];
+    int sum = sumLtoR - (r-l+1);
+    return sum >= noOfOne;
 }
 
 void solve()
 {
-    
+    int n = read();
+    int q = read();
+    vi c = rv(n);
+    vpi queries(q);
+    for (int i = 0; i < q; i++)
+    {
+        queries[i].first = read();
+        queries[i].second = read();
+    }
+
+    int temp = 0;
+    int summation = 0;
+    summationPrefix.pb(c[0]);
+    for(int i=0; i<n; i++)
+    {
+        if(c[i] == 1) countOfOnePrefix.pb(++temp);
+        else countOfOnePrefix.pb(temp);
+        if(i > 0){
+            summationPrefix.pb(summationPrefix[i-1] + c[i]);
+        }
+    }
+  
+
+    for (auto x : queries)
+    {
+        if (x.first == x.second)
+        {
+            NO;
+            continue;
+        }
+        else if (check(c, x.first, x.second))
+        {
+            YES;
+        }
+        else
+        {
+            NO;
+        }
+    }
+}
+
+signed main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int t = read();
+    while (t--)
+    {
+        solve();
+    }
+
+    return 0;
 }

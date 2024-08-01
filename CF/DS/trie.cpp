@@ -153,7 +153,7 @@ public:
 
 int main()
 {
-    Trie trie;
+    Trie trie;  
 
     trie.insert("apple");
     cout << (trie.search("apple") ? "YES" : "NO") << endl;   // Output: YES

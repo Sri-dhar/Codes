@@ -1,86 +1,52 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    int Max;
-    unordered_map<int, vector<int>> dp;
+    int width_global;
+    vector<int> memo;
+    vector<vector<int>> books_global;
 
-    int hash(int i, int j) {
-        return i * 100 + j;
+    int helper(int idx)
+    {
+        if(idx == books_global.size()) return 0;
+        if(memo[idx] != -1) return memo[idx];
+
+        int returnVal;
+        int maxi{}, width{};
+        for(int i=idx; i<books_global.size() && (width+books_global[i][0]) <= width_global; i++){
+            maxi = max(maxi, books_global[i][1]);
+            width += books_global[i][0];
+            returnVal = min(returnVal, helper(i+1));
+        }
+
+        return memo[idx] = returnVal;
     }
 
-    int getValid(string &s) {
-        long long valid = 0;
-        stack<long long> st;
-        st.push({s[0] - '0'});
-        for (int i = 1; i < s.length(); ++i) {
-            if (isdigit(s[i])) {
-                if (s[i - 1] == '*') {
-                    long long mul = 1ll * st.top() * (s[i] - '0');
-                    st.pop();
-                    st.push(mul);
-                } else {
-                    st.push({s[i] - '0'});
-                }
+    int dp(vector<vector<int>> &books, int shelfWidth)
+    {
+        int n = books.size();
+        vector<int> dp(n + 1, INT_MAX); 
+        dp[0] = 0; 
+
+        for (int i = 1; i <= n; ++i) {
+            int width = 0, height = 0;
+
+            for (int j = i; j > 0; --j) {
+                width += books[j - 1][0];
+                if (width > shelfWidth) break; 
+
+                height = max(height, books[j - 1][1]); 
+                dp[i] = min(dp[i], dp[j - 1] + height); 
             }
         }
 
-        while (st.size()) {
-            valid += st.top();
-            st.pop();
-        }
-        return valid;
+        return dp[n];
     }
 
-    vector<int> check(int i, int j, string &s) {
-        if (i == j) return {(s[i] - '0')};
-
-        int hashed = hash(i, j);
-        if (!dp.count(hashed)) {
-            unordered_set<int> possible;
-            for (int k = i; k <= j - 2; k += 2) {
-                vector<int> res1 = check(i, k, s), res2 = check(k + 2, j, s);
-                for (auto &val1 : res1) {
-                    for (auto &val2 : res2) {
-                        int val = s[k + 1] == '*' ? val1 * val2 : val1 + val2;
-                        if (val <= Max) {
-                            possible.insert(val);
-                        }
-                    }
-                }
-            }
-
-            dp[hashed] = vector<int>(possible.begin(), possible.end());
-        }
-        return dp[hashed];
-    }
-
-    int scoreOfStudents(string s, vector<int>& answers) {
-        dp.clear();
-        Max = 1000;
-        vector<int> possible_ans = check(0, s.length() - 1, s);
-        unordered_set<int> can(possible_ans.begin(), possible_ans.end());
-        int actual_ans = getValid(s);
-        int return_val = 0;
-
-        for (auto &val : answers) {
-            if (val == actual_ans) {
-                return_val += 5;
-            } else if (can.count(val)) {
-                return_val += 2;
-            }
-        }
-
-        return return_val;
+    int minHeightShelves(vector<vector<int>> &books, int shelfWidth)
+    {
+        return dp(books, shelfWidth);
     }
 };
-
-int main() {
-    Solution solution;
-    string s = "2+3*4+5";
-    vector<int> answers = {19,25,29,45};
-    int score = solution.scoreOfStudents(s, answers);
-    cout << "Score: " << score << endl;
-    return 0;
-}

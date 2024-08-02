@@ -6,27 +6,30 @@
 #include <unistd.h>
 #include <algorithm>
 #include <sys/wait.h>
+#include <atomic>
 
 using namespace std;
 
+atomic<int> connection_id_counter(0);
+
 void reverse(char *str) {
-    reverse(str, str + strlen(str));
+    std::reverse(str, str + strlen(str));
 }
 
-void handle_client(int client_socket) {
+void handle_client(int client_socket, int connection_id) {
     char buffer[1024];
     while (true) {
-                    (buffer, 0, sizeof(buffer));
+        memset(buffer, 0, sizeof(buffer)); 
         int bytes_received = recv(client_socket, buffer, sizeof(buffer), 0);
         if (bytes_received <= 0) {
             break;
         }
-        cout << "Client socket " << client_socket << " sent message: " << buffer << endl;
+        cout << "Client ID " << connection_id << " sent message: " << buffer << endl;
 
-        reverse(buffer, buffer + strlen(buffer));
+        reverse(buffer);
 
         send(client_socket, buffer, strlen(buffer), 0);
-        cout << "Sending reply: " << buffer << endl;
+        cout << "Sending reply to Client ID " << connection_id << ": " << buffer << endl;
     }
     close(client_socket);
 }
@@ -67,19 +70,21 @@ int main(int argc, char *argv[]) {
             continue;
         }
 
-        cout << "Connected with client socket number " << client_socket << endl;
+        int connection_id = connection_id_counter.fetch_add(1);
+
+        cout << "Connected with Client ID " << connection_id << endl;
 
         pid_t pid = fork();
         if (pid < 0) {
             cerr << "Error forking child process" << endl;
             close(client_socket);
             continue;
-        } else if (pid == 0) { 
-            close(server_socket); 
-            handle_client(client_socket);
+        } else if (pid == 0) {
+            close(server_socket);
+            handle_client(client_socket, connection_id);
             exit(0);
-        } else { 
-            close(client_socket); 
+        } else {
+            close(client_socket);
         }
     }
 

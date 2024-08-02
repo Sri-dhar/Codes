@@ -16,14 +16,12 @@ int main(int argc, char *argv[]) {
     const char *server_ip = argv[1];
     int port = atoi(argv[2]);
 
-    // Create socket
     int client_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (client_socket < 0) {
         cerr << "Error creating socket" << endl;
         return 1;
     }
 
-    // Connect to server
     struct sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
@@ -44,11 +42,7 @@ int main(int argc, char *argv[]) {
     while (true) {
         cout << "Please enter the message to the server: ";
         cin.getline(buffer, sizeof(buffer));
-
-        // Send message to server
         send(client_socket, buffer, strlen(buffer), 0);
-
-        // Receive message from server
         memset(buffer, 0, sizeof(buffer));
         recv(client_socket, buffer, sizeof(buffer), 0);
         cout << "Server reply: " << buffer << endl;

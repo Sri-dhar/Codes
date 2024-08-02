@@ -5,28 +5,26 @@
 #include <string.h>
 #include <unistd.h>
 #include <algorithm>
+#include <sys/wait.h>
 
 using namespace std;
 
 void reverse(char *str) {
-    std::reverse(str, str + strlen(str));
+    reverse(str, str + strlen(str));
 }
 
 void handle_client(int client_socket) {
     char buffer[1024];
     while (true) {
-        // Receive message from client
-        memset(buffer, 0, sizeof(buffer)); // Clear buffer
+                    (buffer, 0, sizeof(buffer));
         int bytes_received = recv(client_socket, buffer, sizeof(buffer), 0);
         if (bytes_received <= 0) {
-            break; // Client disconnected or error
+            break;
         }
         cout << "Client socket " << client_socket << " sent message: " << buffer << endl;
 
-        // Reverse string   
-        reverse(buffer);
+        reverse(buffer, buffer + strlen(buffer));
 
-        // Send message to client
         send(client_socket, buffer, strlen(buffer), 0);
         cout << "Sending reply: " << buffer << endl;
     }
@@ -41,19 +39,12 @@ int main(int argc, char *argv[]) {
 
     int port = atoi(argv[1]);
 
-    
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
-    //socket function takes
-    //AF_INET: address family, IPv4
-    //SOCK_STREAM: type of socket, TCP
-    //0: protocol, 0 means use default protocol for AF_INET and SOCK_STREAM
-    
     if (server_socket < 0) {
         cerr << "Error creating socket" << endl;
         return 1;
     }
 
-    // Bind socket
     struct sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
@@ -65,13 +56,11 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Listen for connections
-    listen(server_socket, 1); // Backlog of 1 connection
+    listen(server_socket, 5);
 
     cout << "Server listening on port " << port << endl;
 
     while (true) {
-        // Accept connection
         int client_socket = accept(server_socket, NULL, NULL);
         if (client_socket < 0) {
             cerr << "Error accepting connection" << endl;
@@ -80,8 +69,18 @@ int main(int argc, char *argv[]) {
 
         cout << "Connected with client socket number " << client_socket << endl;
 
-        // Handle the client
-        handle_client(client_socket);
+        pid_t pid = fork();
+        if (pid < 0) {
+            cerr << "Error forking child process" << endl;
+            close(client_socket);
+            continue;
+        } else if (pid == 0) { 
+            close(server_socket); 
+            handle_client(client_socket);
+            exit(0);
+        } else { 
+            close(client_socket); 
+        }
     }
 
     close(server_socket);

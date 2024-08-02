@@ -4,32 +4,31 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
-#include <algorithm>
-#include <sys/wait.h>
 
 using namespace std;
-
-void reverse(char *str) {
-    reverse(str, str + strlen(str));
-}
 
 void handle_client(int client_socket) {
     char buffer[1024];
     while (true) {
-        // Receive message from client
-                    (buffer, 0, sizeof(buffer));
-        int bytes_received = recv(client_socket, buffer, sizeof(buffer), 0);
+        memset(buffer, 0, sizeof(buffer)); // Clear buffer
+        int bytes_received = recv(client_socket, buffer, sizeof(buffer) - 1, 0); // Receive message from client
         if (bytes_received <= 0) {
-            break; // Client disconnected
+            break; // Client disconnects
         }
+        buffer[bytes_received] = '\0'; // Null-terminate the received data
         cout << "Client socket " << client_socket << " sent message: " << buffer << endl;
 
-        // Reverse string
-        reverse(buffer, buffer + strlen(buffer));
+        // Prompt server user for a reply
+        cout << "Enter your reply: ";
+        string server_reply;
+        getline(cin, server_reply);
 
-        // Send message to client
-        send(client_socket, buffer, strlen(buffer), 0);
-        cout << "Sending reply: " << buffer << endl;
+        // Send the reply back to the client
+        if (send(client_socket, server_reply.c_str(), server_reply.length(), 0) < 0) {
+            cerr << "Error sending message" << endl;
+            break;
+        }
+        cout << "Sending reply: " << server_reply << endl;
     }
     close(client_socket);
 }
@@ -42,14 +41,12 @@ int main(int argc, char *argv[]) {
 
     int port = atoi(argv[1]);
 
-    // Create socket
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket < 0) {
         cerr << "Error creating socket" << endl;
         return 1;
     }
 
-    // Bind socket
     struct sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
@@ -61,13 +58,11 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Listen for connections
-    listen(server_socket, 5); // Backlog of 5 connections
+    listen(server_socket, 1);
 
     cout << "Server listening on port " << port << endl;
 
     while (true) {
-        // Accept connection
         int client_socket = accept(server_socket, NULL, NULL);
         if (client_socket < 0) {
             cerr << "Error accepting connection" << endl;
@@ -76,19 +71,7 @@ int main(int argc, char *argv[]) {
 
         cout << "Connected with client socket number " << client_socket << endl;
 
-        // Fork a child process to handle the client
-        pid_t pid = fork();
-        if (pid < 0) {
-            cerr << "Error forking child process" << endl;
-            close(client_socket);
-            continue;
-        } else if (pid == 0) { // Child process
-            close(server_socket); // Close listening socket in child
-            handle_client(client_socket);
-            exit(0);
-        } else { // Parent process
-            close(client_socket); // Close client socket in parent
-        }
+        handle_client(client_socket);
     }
 
     close(server_socket);

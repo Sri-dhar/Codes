@@ -124,47 +124,10 @@ bool check(vector<int> &c, int l, int r)
     return sum >= noOfOne;
 }
 
-void solve()
-{
+void solve() {
     int n = read();
-    int q = read();
-    vi c = rv(n);
-    vpi queries(q);
-    for (int i = 0; i < q; i++)
-    {
-        queries[i].first = read();
-        queries[i].second = read();
-    }
+    vvi a = rvm(n,n);
 
-    int temp = 0;
-    int summation = 0;
-    summationPrefix.pb(c[0]);
-    for(int i=0; i<n; i++)
-    {
-        if(c[i] == 1) countOfOnePrefix.pb(++temp);
-        else countOfOnePrefix.pb(temp);
-        if(i > 0){
-            summationPrefix.pb(summationPrefix[i-1] + c[i]);
-        }
-    }
-  
-
-    for (auto x : queries)
-    {
-        if (x.first == x.second)
-        {
-            NO;
-            continue;
-        }
-        else if (check(c, x.first, x.second))
-        {
-            YES;
-        }
-        else
-        {
-            NO;
-        }
-    }
 }
 
 signed main()

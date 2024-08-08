@@ -57,14 +57,14 @@ vector<T> rv(int n)
     return v;
 }
 
-vvi rvm(int n, int m)
-{ // readvectormatrix
-    vvi v(n, vector<int>(m));
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            cin >> v[i][j];
-    return v;
-}
+// vvi rvm(int n, int m)
+// { // readvectormatrix
+//     vvi v(n, vector<int>(m));
+//     for (int i = 0; i < n; i++)
+//         for (int j = 0; j < m; j++)
+//             cin >> v[i][j];
+//     return v;
+// }
 
 // vector<int> pf(vector<int> &arr)
 // {
@@ -109,37 +109,56 @@ int lcm(int a, int b)
 // 	}
 // 	return ans;
 // }
-vi countOfOnePrefix;
-vi summationPrefix;
 
-bool check(vector<int> &c, int l, int r)
-{
-    int noOfOne = countOfOnePrefix[r-1] ;//- ((l == 1) ? 0 : countOfOnePrefix[l - 1]);
-    if(l > 1) noOfOne -= countOfOnePrefix[l-1];
-    if (noOfOne == 0)
-        return true;
-    int sumLtoR = summationPrefix[r-1];// - (l ==1 ? 0 : summationPrefix[l-1]);
-    if(l > 1) sumLtoR -= summationPrefix[l-1];
-    int sum = sumLtoR - (r-l+1);
-    return sum >= noOfOne;
-}
-
-void solve() {
-    int n = read();
-    vvi a = rvm(n,n);
-
-}
+void solve();
 
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
-    int t = read();
+    IOS int t = 1;
+    cin >> t;
     while (t--)
     {
         solve();
     }
-
     return 0;
+}
+
+int f(int x) {
+    if (x == 0) return 1;
+    int length = 0;
+    while (x) {
+        length++;
+        x /= 10;
+    }
+    return length;
+}
+
+void solve()
+{
+    int n = read();
+    vi a = rv(n);
+    vi b = rv(n);
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    priority_queue<int> qa(a.begin(), a.end());
+    priority_queue<int> qb(b.begin(), b.end());
+    int ans = 0;
+    while (!qa.empty()) {
+        if (qa.top() == qb.top()) {
+            qa.pop();
+            qb.pop();
+            continue;
+        }
+        ++ans;
+        if (qa.top() > qb.top()) {
+            int newSize = to_string(qa.top()).size();
+            qa.pop();
+            qa.push(newSize);
+        } else {
+            int newSize = to_string(qb.top()).size();
+            qb.pop();
+            qb.push(newSize);
+        }
+    }
+    cout << ans << endl;
 }

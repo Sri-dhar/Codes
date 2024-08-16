@@ -1,0 +1,22 @@
+1. Is the frame an outgoing or an incoming frame?
+outgoing
+2. What is the source IP address of the network-layer header in the frame?
+Source: 172.16.30.153
+3. What is the destination IP address of the network-layer header in the frame?
+Destination: 172.16.0.10
+4. What is the total number of bytes in the whole frame?
+Frame Length: 131 bytes (1048 bits)
+5. What is the number of bytes in the Ethernet (data-link layer) header?
+Destination: Cisco_9f:f2:01 (00:00:0c:9f:f2:01)  48 bits => 6 bytes
+6. What is the number of bytes in the IP header?
+.... 0101 = Header Length: 20 bytes (5)
+7. What is the number of bytes in the TCP header?
+0101 .... = Header Length: 20 bytes (5)
+8. What is the total bytes in the message (at the application layer)?
+22 byte
+
+
+
+
+
+

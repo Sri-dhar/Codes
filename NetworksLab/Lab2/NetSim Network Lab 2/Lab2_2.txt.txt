@@ -1,0 +1,28 @@
+Frame 562
+
+1. Is the frame an outgoing or an incoming frame?
+incoming
+
+2. What is the source IP address of the network-layer header in the frame?
+Internet Protocol Version 4, Src: 185.123.101.19
+
+3. What is the destination IP address of the network-layer header in the frame?
+Dst: 172.16.30.153
+
+4. What is the total number of bytes in the whole frame?
+Frame 562: 56 bytes on wire (448 bits), 56 bytes captured (448 bits) on interface 0
+
+5. What is the number of bytes in the Ethernet (data-link layer) header?
+Address: e0:0a:f6:b1:c0:c3 (e0:0a:f6:b1:c0:c3) Bits : 48bits Bytes: 6 Bytes
+Source: MojoNetw_85:f7:10 (88:b1:e1:85:f7:10) Bytes : 6 Bytes
+Type: IPv4 (0x0800) Bytes : 2 Bytes
+total = 14 Bytes
+
+6. What is the number of bytes in the IP header?
+.... 0101 = Header Length: 20 bytes (5)
+
+7. What is the number of bytes in the TCP header?
+0101 .... = Header Length: 20 bytes (5)
+
+8. What is the total bytes in the message (at the application layer)?
+File Data: 18 bytes

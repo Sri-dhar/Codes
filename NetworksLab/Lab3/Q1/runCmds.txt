@@ -1,0 +1,9 @@
+g++ -o server server.cpp -lpthread
+g++ -o client client.cpp -lpthread
+
+./server 8399
+./client 127.0.0.1 8399 1
+./client 127.0.0.1 8399 2
+./client 127.0.0.1 8399 3
+./client 127.0.0.1 8399 4
+

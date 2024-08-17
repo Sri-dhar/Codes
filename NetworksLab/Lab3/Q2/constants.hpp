@@ -26,4 +26,4 @@ const int ENCRYPTION_KEY2 = 0x0FA9834B;
 
 #define WAIT this_thread::sleep_for(chrono::milliseconds(300))
 
-#endif // CONSTANTS_HPP
+#endif 

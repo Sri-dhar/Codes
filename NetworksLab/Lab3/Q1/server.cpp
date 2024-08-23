@@ -11,16 +11,16 @@
 
 using namespace std;
 
-mutex cout_mutex;  // Mutex for synchronized output
-mutex clients_mutex;  // Mutex to protect the clients list
+mutex cout_mutex;  
+mutex clients_mutex; 
 
-vector<int> clients;  // List of client sockets
+vector<int> clients; 
 
-// Broadcast message to all clients except the sender
+
 void broadcast_message(const string &message, int sender_socket) {
     lock_guard<mutex> lock(clients_mutex);
     for (int client_socket : clients) {
-        if (client_socket != sender_socket) {  // Exclude the sender
+        if (client_socket != sender_socket) { 
             if (send(client_socket, message.c_str(), message.length(), 0) < 0) {
                 cerr << "Error sending message to client socket " << client_socket << endl;
             }
@@ -31,21 +31,19 @@ void broadcast_message(const string &message, int sender_socket) {
 void handle_client(int client_socket, int client_id) {
     char buffer[1024];
     while (true) {
-        memset(buffer, 0, sizeof(buffer)); // Clear buffer
-        int bytes_received = recv(client_socket, buffer, sizeof(buffer) - 1, 0); // Receive message from client
+        memset(buffer, 0, sizeof(buffer)); 
+        int bytes_received =    (client_socket, buffer, sizeof(buffer) - 1, 0); 
         if (bytes_received <= 0) {
-            break; // Client disconnects
+            break; 
         }
-        buffer[bytes_received] = '\0'; // Null-terminate the received data
+        buffer[bytes_received] = '\0'; 
 
         {
             lock_guard<mutex> lock(cout_mutex);
             cout << "Client ID " << client_id << " sent message: " << buffer << endl;
         }
 
-        // Construct message to broadcast
         string message = "Client ID " + to_string(client_id) + ": " + buffer;
-        // Broadcast the message to all clients except the sender
         broadcast_message(message, client_socket);
 
         {
@@ -54,7 +52,6 @@ void handle_client(int client_socket, int client_id) {
         }
     }
 
-    // Remove the client from the list and close the socket
     {
         lock_guard<mutex> lock(clients_mutex);
         auto it = find(clients.begin(), clients.end(), client_socket);
@@ -68,13 +65,12 @@ void handle_client(int client_socket, int client_id) {
 
 void server_input_thread() {
     while (true) {
-        // Prompt server user for input
+        
         cout << "Enter message to broadcast to all clients: ";
         string server_message;
         getline(cin, server_message);
 
         if (!server_message.empty()) {
-            // Broadcast the server message to all clients
             broadcast_message("Server: " + server_message, -1);
         }
     }
@@ -112,7 +108,6 @@ int main(int argc, char *argv[]) {
     vector<thread> threads;
     int client_id = 1;
 
-    // Start a thread to handle server input for broadcasting messages
     thread input_thread(server_input_thread);
 
     while (true) {
@@ -129,12 +124,11 @@ int main(int argc, char *argv[]) {
 
         cout << "Connected with client ID " << client_id << endl;
 
-        // Create a new thread to handle the client
         threads.emplace_back(handle_client, client_socket, client_id++);
     }
 
     close(server_socket);
-    input_thread.join(); // Wait for the input thread to finish
+    input_thread.join();
     for (auto &t : threads) {
         if (t.joinable()) {
             t.join();
@@ -142,4 +136,3 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
-    

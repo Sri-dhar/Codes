@@ -16,6 +16,7 @@ string simulateApplicationToPhysicalLayer(string data)
     return data;
 }
 
+
 string simulatePhysicalToApplicationLayer(string data)
 {
     cout << "----------------------------------------------" << endl;
@@ -36,4 +37,4 @@ int main()
     string data = "Hello World";
     string BitsStream = simulateApplicationToPhysicalLayer(data);
     string decryptedData = simulatePhysicalToApplicationLayer(BitsStream);
-}
+}   

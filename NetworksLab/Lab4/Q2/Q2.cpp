@@ -60,7 +60,7 @@ string processForDeSequence(string frame)
         {
             i += esc.size();  
             res += flag;
-i += flag.size();           
+i += flag.size();               
         }
         else
         {

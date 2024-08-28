@@ -5,7 +5,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstdlib>
-
+#include <vector>
+#include <string>
 #define FRAME_SIZE 32
 
 using namespace std;
@@ -15,16 +16,55 @@ struct Frame {
     char data[FRAME_SIZE];
 };
 
-void receiveFrame(int serverSocket, ofstream &outputFile) {
+vector<string> receivedData;
+
+void updateFile(const string& filename) {
+    ofstream outputFile(filename, ios::trunc);
+    if (!outputFile.is_open()) {
+        cerr << "Failed to open output file." << endl;
+        return;
+    }
+    for (const auto& data : receivedData) {
+        outputFile << data;
+    }
+    outputFile.close();
+}
+
+void receiveFrame(int serverSocket, const string& filename) {
     Frame frame;
     int bytesReceived = recv(serverSocket, &frame, sizeof(frame), 0);
     if (bytesReceived > 0) {
-        cout << "Frame no: " << frame.sequenceNumber << ", Data: " << frame.data << endl;
-        outputFile.write(frame.data, bytesReceived - sizeof(int));
-        outputFile.flush();
+        cout << "Received Frame no: " << frame.sequenceNumber << ", Data: " << frame.data << endl;
         
-        if (!outputFile.good()) {
-            cerr << "Error writing to file." << endl;
+        string input;
+        cout << "1. Successfully receive and send ACK" << endl;
+        cout << "2. Simulate corruption (don't send ACK)" << endl;
+        cout << "3. Simulate ACK lost (send ACK but don't save frame)" << endl;
+        cout << "Choose an option (1-3): ";
+        cin >> input;
+        
+        if (input == "1") {
+            // Add to vector
+            receivedData.push_back(string(frame.data, bytesReceived - sizeof(int)));
+            
+            // Update file
+            updateFile(filename);
+
+            // Send ACK
+            char ack[10];
+            sprintf(ack, "ACK %d", frame.sequenceNumber);
+            send(serverSocket, ack, strlen(ack), 0);
+            cout << "ACK sent for frame " << frame.sequenceNumber << endl;
+        } else if (input == "2") {
+            cout << "Simulating corruption. No ACK sent." << endl;
+        } else if (input == "3") {
+            // Send ACK but don't save frame
+            char ack[10];
+            sprintf(ack, "ACK %d", frame.sequenceNumber);
+            send(serverSocket, ack, strlen(ack), 0);
+            cout << "ACK sent but frame not saved (simulating ACK lost)" << endl;
+        } else {
+            cout << "Invalid option. Frame discarded." << endl;
         }
     }
 }
@@ -35,8 +75,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    ofstream outputFile("/home/solomons/Codes/NetworksLab/Lab4/Q1/client.txt");
-    
+    string outputFilename = "client.txt";
     int port = atoi(argv[1]);
     int clientSocket;
     struct sockaddr_in serverAddr;
@@ -49,6 +88,7 @@ int main(int argc, char *argv[]) {
 
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(port);
+
     if (inet_pton(AF_INET, "127.0.0.1", &serverAddr.sin_addr) <= 0) {
         cerr << "Invalid address/ Address not supported." << endl;
         close(clientSocket);
@@ -61,17 +101,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if (!outputFile.is_open()) {
-        cerr << "Failed to open output file." << endl;
-        close(clientSocket);
-        return 1;
-    }
-
     while (true) {
-        receiveFrame(clientSocket, outputFile);
+        receiveFrame(clientSocket, outputFilename);
     }
 
-    outputFile.close();
     close(clientSocket);
     return 0;
-}                               
+}   

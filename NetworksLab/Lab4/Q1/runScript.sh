@@ -28,5 +28,6 @@ fi
 konsole --hold -e ./server $PORT_NUM &
 sleep 2
 konsole --hold -e ./client $PORT_NUM &
-sleep 2
-kate client.txt 
+sleep 20
+cat client.txt 
+                

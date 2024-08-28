@@ -5,7 +5,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstdlib>
-
+#include <chrono>
+#include <thread>
 #define FRAME_SIZE 32
 
 using namespace std;
@@ -15,9 +16,39 @@ struct Frame {
     char data[FRAME_SIZE];  
 };
 
-void sendFrame(int clientSocket, Frame frame) {
+bool sendFrame(int clientSocket, Frame frame) {
     send(clientSocket, &frame, sizeof(frame), 0);
     cout << "Sent Frame: Seq No: " << frame.sequenceNumber << ", Data: " << frame.data << endl;
+    
+    // Wait for ACK with timeout
+    char ackBuffer[10];
+    fd_set readfds;
+    struct timeval tv;
+    
+    FD_ZERO(&readfds);
+    FD_SET(clientSocket, &readfds);
+    
+    tv.tv_sec = 3;
+    tv.tv_usec = 0;
+    
+    int activity = select(clientSocket + 1, &readfds, NULL, NULL, &tv);
+    
+    if (activity == 0) {
+        cout << "Timeout: No ACK received" << endl;
+        return false;
+    } else if (activity < 0) {
+        cerr << "Select error" << endl;
+        return false;
+    }
+    
+    int bytesReceived = recv(clientSocket, ackBuffer, sizeof(ackBuffer), 0);
+    if (bytesReceived > 0) {
+        ackBuffer[bytesReceived] = '\0';
+        cout << "Received: " << ackBuffer << endl;
+        return true;
+    }
+    
+    return false;
 }
 
 int main(int argc, char *argv[]) {
@@ -72,18 +103,35 @@ int main(int argc, char *argv[]) {
 
     int sequenceNumber = 0;
     char buffer[FRAME_SIZE];
+
     while (file.read(buffer, FRAME_SIZE) || file.gcount()) {
         Frame frame;
-        frame.sequenceNumber = sequenceNumber++;
+        frame.sequenceNumber = sequenceNumber;
         memset(frame.data, 0, FRAME_SIZE);
         memcpy(frame.data, buffer, file.gcount());
 
-        cout << "Converting to Frame: Seq No: " << frame.sequenceNumber << ", Data: " << frame.data << endl;
-        sendFrame(clientSocket, frame);
+        bool ackReceived = false;
+        while (!ackReceived) {
+            cout << "Sending Frame: Seq No: " << frame.sequenceNumber << ", Data: " << frame.data << endl;
+            
+            string input;
+            cout << "Send this frame? (y/n): ";
+            cin >> input;
+            
+            if (input == "y" || input == "Y") {
+                ackReceived = sendFrame(clientSocket, frame);
+                if (!ackReceived) {
+                    cout << "ACK not received. Resending frame..." << endl;
+                }
+            } else {
+                cout << "Frame not sent. Retrying..." << endl;
+            }
+        }
+        sequenceNumber++;
     }
 
     file.close();
     close(clientSocket);
     close(serverSocket);
     return 0;
-}
+}               

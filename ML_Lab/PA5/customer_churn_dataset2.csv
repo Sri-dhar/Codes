@@ -1,0 +1,201 @@
+Age,MonthlyCharges,ContractType,Tenure,ChurnType
+56,183.36,Monthly,27,Voluntary Churn
+69,64.87,One year,66,No Churn
+46,93.87,One year,5,Voluntary Churn
+32,156.0,One year,29,Voluntary Churn
+60,61.18,Two year,37,No Churn
+25,33.86,Monthly,38,Voluntary Churn
+78,72.16,Two year,8,Voluntary Churn
+38,49.02,Two year,65,No Churn
+56,187.35,One year,17,Voluntary Churn
+75,165.46,Two year,71,No Churn
+36,134.01,One year,45,No Churn
+40,176.86,Monthly,4,Involuntary Churn
+28,164.66,One year,36,Voluntary Churn
+28,53.58,Monthly,70,Voluntary Churn
+41,180.66,One year,31,Voluntary Churn
+70,117.08,Two year,19,Voluntary Churn
+53,165.34,Two year,61,No Churn
+57,181.3,Monthly,54,Voluntary Churn
+41,77.24,Monthly,39,No Churn
+20,39.81,Monthly,19,Voluntary Churn
+39,61.03,One year,39,No Churn
+70,96.88,One year,67,No Churn
+19,167.24,Monthly,45,Voluntary Churn
+41,174.93,Two year,13,No Churn
+61,21.25,One year,58,No Churn
+47,111.93,One year,20,Voluntary Churn
+55,95.13,One year,61,No Churn
+19,59.98,Monthly,39,Voluntary Churn
+77,41.58,Monthly,1,Voluntary Churn
+38,80.77,Monthly,3,Voluntary Churn
+50,189.72,Monthly,62,Voluntary Churn
+29,78.18,Monthly,63,Voluntary Churn
+75,113.38,Two year,25,Voluntary Churn
+39,146.54,Two year,56,No Churn
+78,85.45,Monthly,33,Voluntary Churn
+61,194.92,One year,38,No Churn
+42,193.24,Monthly,6,Involuntary Churn
+66,65.32,Two year,58,No Churn
+44,109.5,Two year,44,No Churn
+76,74.16,One year,45,No Churn
+59,71.27,Two year,32,No Churn
+45,26.64,Monthly,45,No Churn
+77,129.72,One year,61,No Churn
+33,110.48,Monthly,47,Voluntary Churn
+32,29.27,Monthly,21,Voluntary Churn
+79,70.16,One year,36,No Churn
+79,183.49,Monthly,19,Voluntary Churn
+64,63.12,Two year,20,No Churn
+79,46.08,Monthly,57,No Churn
+68,108.1,One year,18,Voluntary Churn
+61,197.42,One year,47,No Churn
+72,63.57,One year,49,No Churn
+69,140.98,Monthly,14,Voluntary Churn
+74,157.09,One year,15,Voluntary Churn
+20,62.77,One year,31,No Churn
+54,151.08,Monthly,1,Involuntary Churn
+68,86.2,Two year,54,No Churn
+24,133.82,Monthly,3,Involuntary Churn
+38,134.04,One year,16,Voluntary Churn
+26,116.44,One year,57,No Churn
+56,36.25,Monthly,12,Voluntary Churn
+35,170.35,Two year,16,No Churn
+21,77.74,One year,24,No Churn
+42,53.57,One year,28,No Churn
+77,27.34,One year,8,Voluntary Churn
+31,126.36,Monthly,36,Voluntary Churn
+67,141.96,One year,8,Voluntary Churn
+75,22.99,Two year,58,No Churn
+26,112.18,One year,60,No Churn
+43,60.77,One year,50,No Churn
+70,136.13,Two year,28,Voluntary Churn
+19,51.39,One year,41,No Churn
+37,144.37,Monthly,64,Voluntary Churn
+45,89.61,Monthly,27,Voluntary Churn
+64,188.61,Monthly,63,Voluntary Churn
+77,44.75,Two year,17,No Churn
+24,81.39,One year,33,No Churn
+61,40.43,Monthly,29,Voluntary Churn
+78,186.44,Two year,13,Voluntary Churn
+25,177.92,One year,46,No Churn
+64,66.43,Two year,35,No Churn
+52,138.8,Monthly,6,Involuntary Churn
+31,167.1,Monthly,69,Voluntary Churn
+34,119.94,Monthly,47,Voluntary Churn
+53,115.34,Two year,25,No Churn
+67,63.53,Two year,66,No Churn
+57,36.76,Monthly,10,Voluntary Churn
+21,181.5,Two year,56,No Churn
+19,182.08,Monthly,30,Voluntary Churn
+79,133.96,Monthly,5,Involuntary Churn
+23,81.03,One year,33,No Churn
+71,82.86,Two year,65,No Churn
+59,150.67,Monthly,18,Voluntary Churn
+21,181.48,Monthly,49,Voluntary Churn
+71,179.68,Two year,11,Voluntary Churn
+46,160.38,One year,26,Voluntary Churn
+35,135.57,One year,63,No Churn
+43,35.15,Monthly,59,No Churn
+61,49.09,Two year,27,No Churn
+51,181.74,One year,49,No Churn
+27,129.16,Two year,33,Voluntary Churn
+79,21.66,Two year,1,Voluntary Churn
+53,38.26,Monthly,21,Voluntary Churn
+31,139.43,One year,55,No Churn
+48,20.91,Monthly,6,Voluntary Churn
+65,48.95,One year,69,No Churn
+32,118.77,One year,5,Voluntary Churn
+25,144.54,One year,3,Voluntary Churn
+31,137.35,One year,53,No Churn
+40,60.37,One year,23,No Churn
+77,148.19,Two year,53,No Churn
+74,62.7,Monthly,37,No Churn
+79,78.57,Two year,17,No Churn
+57,154.37,One year,1,Voluntary Churn
+38,136.93,Monthly,51,Voluntary Churn
+33,172.86,One year,45,No Churn
+62,138.37,Monthly,4,Involuntary Churn
+35,122.3,Two year,62,No Churn
+64,36.86,Monthly,65,No Churn
+70,86.19,Monthly,32,Voluntary Churn
+41,67.74,Monthly,34,Voluntary Churn
+43,63.92,Monthly,39,No Churn
+42,195.14,Monthly,26,Voluntary Churn
+77,90.76,One year,34,No Churn
+77,180.57,Monthly,54,Voluntary Churn
+77,133.6,Monthly,3,Involuntary Churn
+62,163.07,Two year,50,No Churn
+58,110.47,Monthly,12,Voluntary Churn
+46,123.84,Two year,65,No Churn
+32,108.65,One year,54,No Churn
+62,55.14,Monthly,5,Voluntary Churn
+18,150.04,Two year,57,No Churn
+42,70.54,Two year,17,No Churn
+24,24.38,One year,47,No Churn
+26,136.19,Monthly,23,Voluntary Churn
+41,51.88,Monthly,14,Voluntary Churn
+18,189.28,Two year,66,No Churn
+61,191.71,Monthly,51,Voluntary Churn
+25,184.68,Two year,38,No Churn
+41,86.63,Monthly,64,No Churn
+28,22.78,Two year,38,No Churn
+68,187.1,Monthly,50,Voluntary Churn
+34,97.07,One year,30,No Churn
+25,194.0,Monthly,51,Voluntary Churn
+52,193.45,Monthly,63,Voluntary Churn
+52,173.54,One year,52,No Churn
+50,73.0,Monthly,38,No Churn
+76,89.32,One year,30,No Churn
+22,173.2,Monthly,51,Voluntary Churn
+59,77.05,Two year,5,No Churn
+56,50.51,Two year,29,No Churn
+75,120.22,Monthly,4,Involuntary Churn
+58,188.51,Monthly,10,Involuntary Churn
+45,145.29,Monthly,56,Voluntary Churn
+24,122.61,Two year,17,Voluntary Churn
+26,37.49,Monthly,17,Voluntary Churn
+25,130.7,Two year,69,No Churn
+29,198.21,One year,34,Voluntary Churn
+51,45.22,Two year,6,No Churn
+50,113.3,Two year,53,No Churn
+65,177.93,One year,66,No Churn
+72,153.34,Two year,43,No Churn
+40,145.46,Monthly,23,Voluntary Churn
+79,146.45,Monthly,55,Voluntary Churn
+41,84.71,Two year,16,No Churn
+54,72.85,Monthly,8,Voluntary Churn
+52,165.69,Two year,4,Voluntary Churn
+61,165.82,Monthly,4,Involuntary Churn
+57,176.07,Monthly,56,Voluntary Churn
+39,184.38,Two year,25,No Churn
+44,112.04,Monthly,67,Voluntary Churn
+52,110.27,Two year,67,No Churn
+18,163.69,Monthly,27,Voluntary Churn
+52,136.99,Monthly,32,Voluntary Churn
+54,146.35,One year,50,No Churn
+64,163.24,One year,61,No Churn
+31,180.2,Two year,51,No Churn
+20,80.84,One year,19,No Churn
+18,87.6,Two year,21,No Churn
+22,36.92,One year,5,Voluntary Churn
+43,124.09,Monthly,42,Voluntary Churn
+72,26.47,Two year,61,No Churn
+31,103.81,Two year,22,No Churn
+56,117.68,Monthly,21,Voluntary Churn
+44,71.58,Two year,70,No Churn
+26,126.35,Two year,1,Voluntary Churn
+32,25.49,One year,5,Voluntary Churn
+32,26.72,Two year,12,No Churn
+43,168.07,Monthly,46,Voluntary Churn
+59,84.83,One year,34,No Churn
+77,42.87,One year,49,No Churn
+30,114.0,Monthly,45,Voluntary Churn
+68,158.6,Monthly,27,Voluntary Churn
+49,58.85,One year,26,No Churn
+56,132.12,Two year,47,No Churn
+66,35.36,One year,56,No Churn
+69,29.3,Monthly,63,No Churn
+78,115.64,One year,48,No Churn
+49,117.31,Monthly,61,Voluntary Churn
+21,134.74,One year,26,Voluntary Churn

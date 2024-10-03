@@ -1,0 +1,30 @@
+1. What are the SSIDs of the two access points that are issuing most of the beacon
+frames in this trace?
+
+Ans.
+SSID: "30 Munroe St"
+SSID: "linksys12"
+
+
+2. What is the interval of time between the transmissions of beacon frames from this access point (AP)? (Hint: this interval of time is contained in a field within the beacon frame itself).
+
+Ans.
+Beacon Interval: 0.102400 [Seconds]
+
+
+3. What (in hexadecimal notation) is the source MAC address on the beacon frame from this access point? Recall that the source, destination, and BSS are three addresses used in an 802.11 frame.
+
+Ans.
+Source address: CiscoLinksys_f7:1d:51 (00:16:b6:f7:1d:51)
+
+
+4. What (in hexadecimal notation) is the destination MAC address on the beacon
+frame from 30 Munroe St??
+
+Ans.
+Destination address: Broadcast (ff:ff:ff:ff:ff:ff)
+
+5. What (in hexadecimal notation) is the MAC BSS ID on the beacon frame from 30 Munroe St?
+
+Ans.
+BSS Id: CiscoLinksys_f7:1d:51 (00:16:b6:f7:1d:51)

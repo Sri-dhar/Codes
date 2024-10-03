@@ -135,30 +135,10 @@ int f(int x) {
 
 void solve()
 {
-    int n = read();
-    vi a = rv(n);
-    vi b = rv(n);
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-    priority_queue<int> qa(a.begin(), a.end());
-    priority_queue<int> qb(b.begin(), b.end());
-    int ans = 0;
-    while (!qa.empty()) {
-        if (qa.top() == qb.top()) {
-            qa.pop();
-            qb.pop();
-            continue;
-        }
-        ++ans;
-        if (qa.top() > qb.top()) {
-            int newSize = to_string(qa.top()).size();
-            qa.pop();
-            qa.push(newSize);
-        } else {
-            int newSize = to_string(qb.top()).size();
-            qb.pop();
-            qb.push(newSize);
-        }
-    }
-    cout << ans << endl;
+    string a = read<string>();
+    int m = read();
+    string p = read<string>();
+    string q = read<string>();
+
+    
 }

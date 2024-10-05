@@ -98,7 +98,7 @@ int main() {
         if (num_stations < 1 || num_stations > 100) {
             std::cout << "Invalid input. Please enter a number between 1 and 100.\n";
         }
-    } while (num_stations < 1 || num_stations > 100);
+    } while (num_stations < 1 || num_stations > 100);       
 
     do {
         std::cout << "Enter the total number of time slots (10-1000): ";
@@ -108,7 +108,7 @@ int main() {
         }
     } while (total_slots < 10 || total_slots > 1000);
 
-    csma_cd_simulation(num_stations, total_slots, 15);
+    csma_cd_simulation(num_stations, total_slots, 2 );
 
     return 0;
 }

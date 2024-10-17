@@ -1,6 +1,6 @@
 from sklearn.datasets import load_iris
-import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 def k_means_clustering(data, k, max_iter=100, tol=1e-3):
     np.random.seed(42)
@@ -9,7 +9,7 @@ def k_means_clustering(data, k, max_iter=100, tol=1e-3):
     
     for _ in range(1, k):
         distances = np.sqrt(np.sum((data[:, np.newaxis] - centroids) ** 2, axis=2))
-        min_dis = np.min(distances, axis=1) 
+        min_dis = np.min(distances, axis=1)
         prob = min_dis / np.sum(min_dis)
         centroids = np.vstack([centroids, data[np.random.choice(data.shape[0], 1, p=prob)]])
 
@@ -72,6 +72,8 @@ def silhouette_score(data, labels):
     silhouette_values = silhoutte_function(a,b)
     return np.mean(silhouette_values)
 
+iris_from_csv = pd.read_csv("iris_dataset.csv")
+
 iris = load_iris()
 data = iris.data
 
@@ -131,28 +133,3 @@ for k, sse, iterations, silhouette_avg, labels in results:
 
 acc = calculating_accuracy(data, labels)
 cm = confusion_mat(labels, data)
-
-#saving the image of the plot to the folder
-plt.figure(figsize=(12, 6))
-plt.plot([result[0] for result in results], [result[3] for result in results], marker='o')
-plt.xlabel('Number of Clusters')
-plt.ylabel('Silhouette Score')
-plt.title('Silhouette Score vs Number of Clusters')
-plt.savefig('silhouette_scoreQ1.png')
-
-plt.figure(figsize=(12, 6))
-plt.plot([result[0] for result in results], [result[1] for result in results], marker='o')
-plt.xlabel('Number of Clusters')
-plt.ylabel('SSE')
-plt.title('SSE vs Number of Clusters')
-plt.savefig('SSE_vs_clustersQ1.png')
-
-plt.figure(figsize=(12, 6))
-plt.plot([result[0] for result in results], [result[2] for result in results], marker='o')
-plt.xlabel('Number of Clusters')
-plt.ylabel('Iterations')
-plt.title('Iterations vs Number of Clusters')
-plt.savefig('Iterations_vs_clustersQ1.png')
-
-
-

@@ -108,7 +108,7 @@ int main() {
         }
     } while (total_slots < 10 || total_slots > 1000);
 
-    csma_cd_simulation(num_stations, total_slots, 2 );
+    csma_cd_simulation(num_stations, total_slots,4  );
 
     return 0;
 }

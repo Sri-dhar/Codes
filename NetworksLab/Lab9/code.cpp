@@ -9,27 +9,27 @@ using namespace std;
 
 struct RouteEntry
 {
-    std::string cidr;
-    std::string line;
+    string cidr;
+    string line;
 };
 
-void cidrToNetworkAndMask(const std::string &cidr, in_addr &network, in_addr &mask)
+void cidrToNetworkAndMask(const string &cidr, in_addr &network, in_addr &mask)
 {
     size_t pos = cidr.find('/');
-    std::string ip = cidr.substr(0, pos);
-    int prefixLength = std::stoi(cidr.substr(pos + 1));
+    string ip = cidr.substr(0, pos);
+    int prefixLength = stoi(cidr.substr(pos + 1));
 
-    std::stringstream ss(ip);
-    std::string segment;
-    std::string decimalIp;
+    stringstream ss(ip);
+    string segment;
+    string decimalIp;
 
     // cout << "Converting CIDR IP from hex to decimal: " << ip << endl;
-    while (std::getline(ss, segment, '.'))
+    while (getline(ss, segment, '.'))
     {
         unsigned int decimalSegment;
-        std::stringstream converter(segment);
-        converter >> std::hex >> decimalSegment;
-        decimalIp += std::to_string(decimalSegment) + ".";
+        stringstream converter(segment);
+        converter >> hex >> decimalSegment;
+        decimalIp += to_string(decimalSegment) + ".";
     }
 
     if (!decimalIp.empty())
@@ -50,12 +50,12 @@ bool isInNetwork(const in_addr &ip, const in_addr &network, const in_addr &mask)
     return (ip.s_addr & mask.s_addr) == (network.s_addr & mask.s_addr);
 }
 
-std::string forward(const std::string &ipAddress, const std::vector<RouteEntry> &routingTable)
+string forward(const string &ipAddress, const vector<RouteEntry> &routingTable)
 {
     in_addr ip;
     inet_pton(AF_INET, ipAddress.c_str(), &ip);
 
-    std::string bestMatch;
+    string bestMatch;
     int bestPrefixLength = -1;
 
     // cout << "Processing IP address: " << ipAddress << endl;
@@ -67,7 +67,8 @@ std::string forward(const std::string &ipAddress, const std::vector<RouteEntry> 
 
         if (isInNetwork(ip, network, mask))
         {
-            int prefixLength = std::stoi(entry.cidr.substr(entry.cidr.find('/') + 1));
+            // cout <<"IP "<< ipAddress << " is in network: " << entry.cidr << endl;
+            int prefixLength = stoi(entry.cidr.substr(entry.cidr.find('/') + 1));
 
             // cout << "Matching CIDR: " << entry.cidr << " with line: " << entry.line << endl;
 
@@ -96,18 +97,18 @@ string process(const string &ip)
 {
     if (ip.find('.') != string::npos)
     {
-        std::stringstream ss(ip);
-        std::string segment;
-        std::string decimalIp;
+        stringstream ss(ip);
+        string segment;
+        string decimalIp;
 
         // cout << "Processing input IP in hexadecimal format: " << ip << endl;
 
-        while (std::getline(ss, segment, '.'))
+        while (getline(ss, segment, '.'))
         {
             unsigned int decimalSegment;
-            std::stringstream converter(segment);
-            converter >> std::hex >> decimalSegment;
-            decimalIp += std::to_string(decimalSegment) + ".";
+            stringstream converter(segment);
+            converter >> hex >> decimalSegment;
+            decimalIp += to_string(decimalSegment) + ".";
         }
 
         if (!decimalIp.empty())
@@ -124,8 +125,8 @@ string process(const string &ip)
 
 int main()
 {
-    std::vector<RouteEntry> routingTable = {
-        {"C4.5.2.0/23", "A"},
+    vector<RouteEntry> routingTable = {
+        {"C4.5E.2.0/23", "A"},
         {"C4.5E.4.0/22", "B"},
         {"C4.5E.C0.0/19", "C"},
         {"C4.5E.40.0/18", "D"},

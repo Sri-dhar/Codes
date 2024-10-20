@@ -1,95 +1,126 @@
-#include <iostream>
-#include <vector>
-#include <map>
-#include <set>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
+#define ll long long
 
-vector<int> cacheContents(vector<vector<int>> calllogs) {
-    sort(calllogs.begin(), calllogs.end());
+struct Car {
+    ll pos, vel;
+    int idx;
+    Car(ll p, ll v, int i) : pos(p), vel(v), idx(i) {}
+};
+
+pair<bool, double> willCollide(const Car& car1, const Car& car2) {
+    if (car1.pos == car2.pos) return {true, 0};
+    ll relativeVel = car1.vel - car2.vel;
+    if (relativeVel == 0) return {false, -1};
+    double time = (double)(car2.pos - car1.pos) / relativeVel;
+    return {time >= 0, time};
+}
+
+bool canAchieveTime(vector<Car>& cars, int M, double targetTime) {
+    int n = cars.size();
+    vector<vector<bool>> willCollideMatrix(n, vector<bool>(n, false));
+    vector<int> collisionCount(n, 0);
     
-    map<int, int> priority;  
-    map<int, bool> inCache;  
-    
-    map<pair<int, int>, int> accessCount;
-    for (const auto& log : calllogs) {
-        int timestamp = log[0];
-        int item_id = log[1];
-        accessCount[{timestamp, item_id}]++;
-    }
-    
-    int lastTime = calllogs.back()[0];
-    
-    set<int> items;
-    for (const auto& log : calllogs) {
-        items.insert(log[1]);
-    }
-    
-    for (int time = 1; time <= lastTime; time++) {
-        for (int item : items) {
-            if (priority.find(item) == priority.end()) {
-                priority[item] = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            auto [collides, time] = willCollide(cars[i], cars[j]);
+            if (collides && time <= targetTime) {
+                willCollideMatrix[i][j] = true;
+                collisionCount[i]++;
+                collisionCount[j]++;
             }
-            
-            if (accessCount.find({time, item}) != accessCount.end()) {
-                priority[item] += 2 * accessCount[{time, item}];
-            } else {
-                priority[item] = max(0, priority[item] - 1);
-            }
-            
-            if (priority[item] > 5) {
-                inCache[item] = true;
-            } else if (priority[item] <= 3) {
-                inCache[item] = false;
-            }
-            
         }
     }
     
-    vector<int> result;
-    for (const auto& item : items) {
-        if (inCache[item]) {
-            result.push_back(item);
+    for (int removed = 0; removed < M; removed++) {
+        int maxCollisions = 0;
+        int carToRemove = -1;
+        
+        for (int i = 0; i < n; i++) {
+            if (collisionCount[i] > maxCollisions) {
+                maxCollisions = collisionCount[i];
+                carToRemove = i;
+            }
+        }
+        
+        if (maxCollisions == 0) return true;
+        
+        for (int j = 0; j < n; j++) {
+            if (willCollideMatrix[carToRemove][j]) {
+                collisionCount[j]--;
+            }
+            if (willCollideMatrix[j][carToRemove]) {
+                collisionCount[j]--;
+            }
+        }
+        collisionCount[carToRemove] = 0;
+    }
+    
+    return *max_element(collisionCount.begin(), collisionCount.end()) == 0;
+}
+
+double solve(int N, int M, vector<ll>& positions, vector<ll>& velocities) {
+    vector<Car> cars;
+    for (int i = 0; i < N; i++) {
+        cars.emplace_back(positions[i], velocities[i], i);
+    }
+    
+    bool allMovingAway = true;
+    for (int i = 0; i < N && allMovingAway; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if ((cars[i].vel == cars[j].vel && cars[i].pos != cars[j].pos) ||
+                (cars[i].pos < cars[j].pos && cars[i].vel > cars[j].vel) ||
+                (cars[i].pos > cars[j].pos && cars[i].vel < cars[j].vel)) {
+                allMovingAway = false;
+                break;
+            }
+        }
+    }
+    if (allMovingAway) return -1;
+    
+    double left = 0, right = 1e18;
+    for (int iter = 0; iter < 100; iter++) {
+        double mid = (left + right) / 2;
+        if (canAchieveTime(cars, M, mid)) {
+            left = mid;
+        } else {
+            right = mid;
         }
     }
     
-    if (result.empty()) {
-        return {-1};
+    return left;
+}
+
+void runTestCase() {
+    int N, M;
+    cin >> N >> M;
+    
+    vector<ll> positions(N), velocities(N);
+    for (int i = 0; i < N; i++) {
+        cin >> positions[i];
+    }
+    for (int i = 0; i < N; i++) {
+        cin >> velocities[i];
     }
     
-    sort(result.begin(), result.end());
-    return result;
+    double result = solve(N, M, positions, velocities);
+    
+    if (result == -1) {
+        cout << -1 << endl;
+    } else {
+        ll rounded = (ll)(result * 1000000 + 0.5);
+        cout << rounded << endl;
+    }
 }
 
 int main() {
-    // Test case from the problem
-    vector<vector<int>> logs = {
-        {1, 1},
-        {2, 1},
-        {3, 1},
-        {4, 2},
-        {5, 2},
-        {6, 2}
-    };
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     
-    cout << "Processing cache simulation with the following logs:" << endl;
-    for (const auto& log : logs) {
-        cout << "Time: " << log[0] << ", Item: " << log[1] << endl;
+    int T = 1;
+    while (T--) {
+    runTestCase();          
     }
-    cout << "\nSimulation results:" << endl;
-    
-    vector<int> result = cacheContents(logs);
-    
-    cout << "\nFinal cache contents: ";
-    if (result[0] == -1) {  
-        cout << "Cache is empty" << endl;
-    } else {
-        for (int item : result) {
-            cout << item << " ";
-        }
-        cout << endl;
-    }           
     
     return 0;
 }

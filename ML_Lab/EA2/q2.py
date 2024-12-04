@@ -2,20 +2,15 @@ from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
 import numpy as np
 
-def k_means_clustering(data, k, max_iter=100):
-    np.random.seed(42)
-
+def k_means_clustering(data, k, true_labels, max_iter=100):
+    unique_classes = np.unique(true_labels)
     centroids = np.zeros((k, data.shape[1]))
-    centroids[0] = data[np.random.randint(0, data.shape[0])]
+    for i in range(k):
+        class_samples = data[true_labels == unique_classes[i]]
+        centroids[i] = class_samples[0]  
 
-    tol=1e-4
+    tol = 1e-4
     
-    for i in range(1, k):
-        distances = np.sqrt(np.sum((data[:, np.newaxis] - centroids[:i]) ** 2, axis=2))
-        min_dis = np.min(distances, axis=1)
-        prob = min_dis / np.sum(min_dis)
-        centroids[i] = data[np.random.choice(data.shape[0], 1, p=prob)]
-
     for iteration in range(max_iter):
         distances = np.sqrt(np.sum((data[:, np.newaxis] - centroids) ** 2, axis=2))
         labels = np.argmin(distances, axis=1)
@@ -29,7 +24,7 @@ def k_means_clustering(data, k, max_iter=100):
 
     sse = np.sum((data - centroids[labels]) ** 2)
 
-    return labels, sse, iteration + 1
+    return labels, sse, iteration + 1       
 
 def k_means_attempt_2(data, k, max_iter=100):
     np.random.seed(42)
@@ -80,9 +75,10 @@ data = iris.data
 
 k_values = [2, 3]
 results = []
+true_labels = iris.target
 
 for k in k_values:
-    labels, sse, iterations = k_means_clustering(data, k)
+    labels, sse, iterations = k_means_clustering(data, k,true_labels=true_labels)   
     silhouette_avg = silhouette_score(data, labels)
     results.append((k, sse, iterations, silhouette_avg, labels))
 

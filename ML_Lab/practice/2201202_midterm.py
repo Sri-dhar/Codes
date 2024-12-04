@@ -210,6 +210,10 @@ print("Training Set Shape:", training_set.shape)
 print("Validation Set Shape:", validation_set.shape)
 print("Test Set Shape:", test_set.shape)
 
+mean = np.mean(data, axis=0)  
+std = np.std(data, axis=0)          
+data = (data - mean) / std
+
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 

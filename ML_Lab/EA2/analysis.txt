@@ -1,0 +1,185 @@
+Version A (Random Initialization)
+
+    Initial centroids are chosen randomly from the dataset
+    No prior knowledge of class labels is used
+    Each run may produce different results due to random initialization
+    More susceptible to getting stuck in local optima
+
+Version B (Label-based Initialization)
+
+    Initial centroids are chosen from labeled samples
+    One centroid from each known class
+    Deterministic initialization (same starting points each run)
+    Leverages domain knowledge through labeled samples
+
+2. Expected Output Differences
+Sum-Square-Error (SSE)
+
+    Version A:
+        Generally higher SSE values
+        More variable SSE across different runs
+        May require multiple runs to find optimal clustering
+        Higher chance of suboptimal solutions
+    Version B:
+        Generally lower SSE values
+        More consistent SSE across runs
+        Single run usually sufficient
+        Better chance of finding global optimum
+
+Silhouette Coefficient
+
+    Version A:
+        More variable silhouette scores
+        Might show lower average scores
+        Results heavily dependent on initialization luck
+    Version B:
+        More consistent silhouette scores
+        Generally higher average scores
+        Better cluster separation due to informed initialization
+
+Number of Iterations
+
+    Version A:
+        Generally requires more iterations
+        More variable convergence time
+        May need multiple restarts
+        Different iteration counts across runs
+    Version B:
+        Usually requires fewer iterations
+        More consistent convergence time
+        Single run typically sufficient
+        Similar iteration counts across runs
+
+3. Performance Characteristics
+Clustering Quality
+
+    Version A:
+        Clusters might not align well with actual classes
+        More exploratory in nature
+        Could discover unexpected patterns
+        Results vary between runs
+    Version B:
+        Clusters more likely to align with actual classes
+        More supervised in nature
+        Better at finding known class structures
+        Consistent results between runs
+
+Stability
+
+    Version A:
+        Less stable across multiple runs
+        Requires multiple initializations
+        Results need to be averaged
+        Higher standard deviation in metrics
+    Version B:
+        More stable across runs
+        Single initialization often sufficient
+        More reproducible results
+        Lower standard deviation in metrics
+
+4. Practical Implications
+When to Use Version A
+
+    No prior knowledge of classes
+    Exploratory data analysis
+    Looking for natural groupings
+    When multiple runs are feasible
+
+When to Use Version B
+
+    Some labeled samples available
+    Need for consistent results
+    Time constraints
+    When alignment with known classes is important
+
+5. Expected Results for IRIS Dataset
+For K=3 (matching actual classes)
+
+    Version A:
+        SSE: Higher and variable (e.g., 60-80)
+        Silhouette: 0.55-0.65 (variable)
+        Iterations: 8-15 (variable)
+    Version B:
+        SSE: Lower and consistent (e.g., 50-60)
+        Silhouette: 0.65-0.75 (consistent)
+        Iterations: 5-8 (consistent)
+
+Note: These numbers are approximate and will vary based on specific implementations and random seeds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def k_means_clustering(data, k, max_iter=100):
+#     np.random.seed(42)
+
+#     centroids = np.zeros((k, data.shape[1]))
+#     centroids[0] = data[np.random.randint(0, data.shape[0])]
+
+#     tol=1e-4
+    
+#     for i in range(1, k):
+#         distances = np.sqrt(np.sum((data[:, np.newaxis] - centroids[:i]) ** 2, axis=2))
+#         min_dis = np.min(distances, axis=1)
+#         prob = min_dis / np.sum(min_dis)
+#         centroids[i] = data[np.random.choice(data.shape[0], 1, p=prob)]
+
+#     for iteration in range(max_iter):
+#         distances = np.sqrt(np.sum((data[:, np.newaxis] - centroids) ** 2, axis=2))
+#         labels = np.argmin(distances, axis=1)
+
+#         new_centroids = np.array([np.mean(data[labels == i], axis=0) for i in range(k)])
+
+#         if np.linalg.norm(centroids - new_centroids) < tol:
+#             break
+
+#         centroids = new_centroids
+
+#     sse = np.sum((data - centroids[labels]) ** 2)
+
+#     return labels, sse, iteration + 1

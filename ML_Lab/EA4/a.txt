@@ -1,0 +1,57 @@
+python 2201202_EA4.py
+2024-11-14 10:07:22,707 - INFO - Using default datasets: iris and breast_cancer
+2024-11-14 10:07:22,708 - INFO -
+Analyzing iris dataset...
+2024-11-14 10:07:22,710 - INFO -
+Training slp...
+2024-11-14 10:07:22,710 - INFO - Starting hyperparameter tuning for slp
+2024-11-14 10:07:23,425 - INFO - Best parameters found for slp: {'max_iter': 500, 'tol': 0.001, 'eta0': 0.01, 'penalty': 'l2', 'alpha': 0.001}
+2024-11-14 10:07:23,425 - INFO - Checking overfitting for slp on iris
+2024-11-14 10:07:23,659 - INFO -
+Training mlp...
+2024-11-14 10:07:23,659 - INFO - Starting hyperparameter tuning for mlp
+2024-11-14 10:09:10,605 - INFO - Best parameters found for mlp: {'hidden_layer_sizes': (100,), 'activation': 'tanh', 'learning_rate': 'constant', 'max_iter': 1000, 'alpha': 0.0001, 'solver': 'adam'}
+2024-11-14 10:09:10,606 - INFO - Checking overfitting for mlp on iris
+2024-11-14 10:09:13,037 - INFO -
+Training knn...
+2024-11-14 10:09:13,038 - INFO - Starting hyperparameter tuning for knn
+2024-11-14 10:09:14,081 - INFO - Best parameters found for knn: {'n_neighbors': 7, 'weights': 'distance', 'metric': 'euclidean', 'algorithm': 'auto', 'leaf_size': 20}
+2024-11-14 10:09:14,081 - INFO - Checking overfitting for knn on iris
+2024-11-14 10:09:14,405 - INFO -
+Analyzing breast_cancer dataset...
+2024-11-14 10:09:14,407 - INFO -
+Training slp...
+2024-11-14 10:09:14,407 - INFO - Starting hyperparameter tuning for slp
+2024-11-14 10:09:15,039 - INFO - Best parameters found for slp: {'max_iter': 500, 'tol': 0.0001, 'eta0': 0.01, 'penalty': 'l2', 'alpha': 0.0001}
+2024-11-14 10:09:15,039 - INFO - Checking overfitting for slp on breast_cancer
+2024-11-14 10:09:15,214 - INFO -
+Training mlp...
+2024-11-14 10:09:15,214 - INFO - Starting hyperparameter tuning for mlp
+2024-11-14 10:11:28,454 - INFO - Best parameters found for mlp: {'hidden_layer_sizes': (100, 50), 'activation': 'relu', 'learning_rate': 'constant', 'max_iter': 1000, 'alpha': 0.0001, 'solver': 'sgd'}
+2024-11-14 10:11:28,454 - INFO - Checking overfitting for mlp on breast_cancer
+2024-11-14 10:11:34,562 - INFO -
+Training knn...
+2024-11-14 10:11:34,562 - INFO - Starting hyperparameter tuning for knn
+2024-11-14 10:11:36,463 - INFO - Best parameters found for knn: {'n_neighbors': 9, 'weights': 'distance', 'metric': 'euclidean', 'algorithm': 'auto', 'leaf_size': 20}
+2024-11-14 10:11:36,463 - INFO - Checking overfitting for knn on breast_cancer
+2024-11-14 10:11:36,757 - INFO - Exporting results to Excel...
+2024-11-14 10:11:36,830 - INFO - Results exported successfully to ml_analysis_results.xlsx
+
+for this output and this question
+Implement singlelayer perceptron (SLP), multilayer perceptron (MLP) and K nearest
+neighbour classifier using in-built libraries.
+Follow the below-mentioned instructions:
+a. Input: Directly from CSV file (corresponding to any dataset), Output: Directly to
+excel sheet
+b. Tune the hyper-parameters (report results of hyperparameter tuning in excel sheet)
+c. Check overfitting issue (report the corresponding graph for the selected model)
+d. Finally report class-wise precision, recall, accuracy and overall accuracy considering
+3-fold cross validation.
+e. Analysing the reporting results (corresponding to b, c, and d) for two different
+datasets
+Marks distribution:
+I. implementation of SLP, MLP, KNN (0.5+1+0.5)
+II. Reporting Hyperparameter tuning results for two datasets (1+1)
+III. Reporting the graphs for overfitting checking for two datasets (1+1)
+IV. Reporting the performance of the model for two datasets (1+1)
+V. Analysis of results (1+1)

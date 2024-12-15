@@ -1,0 +1,8 @@
+sudo ssh -i "key_pair1.pem" ubuntu@ec2-3-110-175-109.ap-south-1.compute.amazonaws.com
+sudo scp -i ~/AWS/key_pair1.pem -r ~/http_server ubuntu@ec2-3-110-175-109.ap-south-1.compute.amazonaws.com:/home/ubuntu/
+
+scp -i ~/AWS/key_pair1.pem -r ubuntu@ec2-3-110-175-109.ap-south-1.compute.amazonaws.com:/home/ubuntu/http_server ~/Downloads/
+scp -i ~/home/solomons/AWS/key_pair1.pem -r ubuntu@ec2-3-110-175-109.ap-south-1.compute.amazonaws.com:/home/ubuntu/http_server ~/Downloads/
+
+
+http://websitebucket1299.s3-website.ap-south-1.amazonaws.com/

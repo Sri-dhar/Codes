@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Hi, I'm Sridhar</h1>
+            <p>Welcome to my portfolio!</p>
+        </div>                  
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I am currently a student at Indian Institute of Information Technology Guwahati. I'm pursuing BTech in the department of Computer Science and Engineering. I ❤️ playing with computers and learning newer technologies.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                </div>
+                <div class="skill">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Graphic Design</h3>
+                </div>
+                <div class="skill">
+                    <i class="fas fa-database"></i>
+                    <h3>Database Management</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2>My Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <h3>Project 1</h3>
+                </div>
+                <div class="portfolio-item">
+                    <h3>Project 2</h3>
+                </div>
+                <div class="portfolio-item">
+                    <h3>Project 3</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback">
+        <div class="container">
+            <h2>Feedback Form</h2>
+            <form id="feedbackForm">
+                <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="message">Your Feedback:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Submit Feedback</button>
+            </form>
+            <div id="feedbackMessage"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Email: [your.email@example.com]</p>
+            <p>Phone: [+123-456-7890]</p>
+            <div class="social-icons">
+                <a href="#" class="fab fa-linkedin"></a>
+                <a href="#" class="fab fa-github"></a>
+                <a href="#" class="fab fa-twitter"></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 [Your Name]. All rights reserved.</p>
+    </footer>
+
+    <script>
+  document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var form = this;
+    var formData = new FormData(form);
+    var feedbackMessage = document.getElementById('feedbackMessage');
+
+    fetch('http://localhost:3000/submit-feedback', {
+        method: 'POST',
+        body: new URLSearchParams(formData),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+            console.log('Not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        feedbackMessage.textContent = data;
+        feedbackMessage.style.color = 'green';
+        form.reset(); // Reset the form only on successful submission
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        feedbackMessage.textContent = 'An error occurred while submitting the feedback.';
+        feedbackMessage.style.color = 'red';
+    });
+});
+    </script>
+</body>
+</html>

@@ -248,7 +248,7 @@ int main()
     }
     catch (const exception &e)
     {
-        cerr << "Fatal error: " << e.what() << endl;
+        cerr << "Fatal error: " << e.3333333333() << endl;
         return 1;
     }
 
